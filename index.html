@@ -1,0 +1,954 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="description" content="Interactive brochure for the Hirachand Daulat AR/VR Lab, Department of Mechanical Engineering, COEP Technological University, Pune.">
+<meta property="og:title" content="Hirachand Daulat AR/VR Lab · COEP Tech">
+<meta property="og:description" content="Take the lab's four XR headsets apart in 3D and try its research projects.">
+<style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>Hirachand Daulat AR/VR Lab</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,300..900&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+:root{
+  --bg:#E9E2D0; --paper:#F3EEE1; --panel:#FBF8F0; --ink:#1B2A44; --ink-2:#4E5A72; --rule:rgba(27,42,68,.13); --rule-2:rgba(27,42,68,.28);
+  --red:#D23F29; --cyan:#1590BA; --red-soft:rgba(210,63,41,.12); --cyan-soft:rgba(21,144,186,.13); --ok:#2F7D4F;
+  --blend:multiply; --ana-r:#FF3B26; --ana-c:#12B5E6;
+  --display:"Archivo","Arial Narrow",Arial,sans-serif; --mono:"IBM Plex Mono",Menlo,Consolas,monospace;
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#0C2140; --paper:#10294F; --panel:#143260; --ink:#E4ECF7; --ink-2:#A7B9D3; --rule:rgba(228,236,247,.10); --rule-2:rgba(228,236,247,.26);
+  --red:#FF7A5E; --cyan:#5CCFFB; --red-soft:rgba(255,122,94,.16); --cyan-soft:rgba(92,207,251,.16); --ok:#6FD49A;
+  --blend:screen; --ana-r:#FF4A33; --ana-c:#1FC8FF; color-scheme:dark;}}
+:root[data-theme="dark"]{
+  --bg:#0C2140; --paper:#10294F; --panel:#143260; --ink:#E4ECF7; --ink-2:#A7B9D3; --rule:rgba(228,236,247,.10); --rule-2:rgba(228,236,247,.26);
+  --red:#FF7A5E; --cyan:#5CCFFB; --red-soft:rgba(255,122,94,.16); --cyan-soft:rgba(92,207,251,.16); --ok:#6FD49A;
+  --blend:screen; --ana-r:#FF4A33; --ana-c:#1FC8FF; color-scheme:dark;}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background-color:var(--bg);color:var(--ink);font:400 16px/1.6 var(--display);font-variation-settings:"wdth" 100;
+  background-image:linear-gradient(var(--rule) 1px,transparent 1px),linear-gradient(90deg,var(--rule) 1px,transparent 1px);background-size:24px 24px;
+  padding-inline:clamp(16px,4vw,40px);padding-block:0 40px}
+.sheet{max-width:1180px;margin:0 auto}
+h1,h2,h3{font-family:var(--display);text-wrap:balance;margin:0}
+p{margin:0}
+button{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--red);outline-offset:3px}
+.mono{font-family:var(--mono)}
+.label{font:600 11px/1.3 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--ink-2)}
+
+/* ---------- sticky title strip ---------- */
+.strip{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;margin-inline:calc(-1*clamp(16px,4vw,40px));padding:10px clamp(16px,4vw,40px);
+  background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-bottom:1.5px solid var(--ink)}
+.strip-in{max-width:1180px;margin:0 auto;display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.drg{font:600 11px var(--mono);letter-spacing:.1em;background:var(--ink);color:var(--bg);padding:4px 8px;white-space:nowrap}
+.zones{display:flex;gap:4px;flex-wrap:wrap;margin-left:auto}
+.zones a{display:flex;align-items:center;gap:6px;text-decoration:none;color:var(--ink);font:500 12px var(--mono);padding:4px 8px;border:1px solid var(--rule-2)}
+.zones a b{font-weight:600;color:var(--red)}
+.zones a:hover{background:var(--panel)}
+@media (max-width:720px){.zones a span{display:none}.drg{font-size:10px}}
+
+/* ---------- section scaffolding ---------- */
+section{padding-block:64px 8px;scroll-margin-top:64px}
+.sec-head{display:grid;grid-template-columns:auto 1fr;gap:6px 18px;align-items:center;margin-bottom:28px;border-bottom:1.5px solid var(--ink);padding-bottom:14px}
+.zone{grid-row:span 2;width:54px;height:54px;border:1.5px solid var(--ink);border-radius:50%;display:grid;place-items:center;font:800 26px var(--display);font-variation-settings:"wdth" 112}
+.sec-head h2{font-size:clamp(1.6rem,3.6vw,2.4rem);font-weight:850;font-variation-settings:"wdth" 118;letter-spacing:-.01em;line-height:1.05}
+.sec-head p{color:var(--ink-2);max-width:62ch}
+
+/* ---------- hero ---------- */
+.hero{padding-top:28px;display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:28px;align-items:start}
+@media (max-width:900px){.hero{grid-template-columns:minmax(0,1fr)}}
+.eyebrow{font:500 12px/1.5 var(--mono);letter-spacing:.08em;color:var(--ink-2)}
+.ana{position:relative;font-weight:900;font-variation-settings:"wdth" 125;font-size:clamp(3.4rem,8.4vw,6.6rem);line-height:.9;letter-spacing:-.035em;color:transparent;margin:10px 0 18px;--ax:0;user-select:none}
+.ana::before,.ana::after{content:attr(data-t);position:absolute;inset:0;mix-blend-mode:var(--blend);transition:transform .25s ease-out}
+.ana::before{color:var(--ana-r);transform:translate(calc(-4px - var(--ax)*5px),0)}
+.ana::after{color:var(--ana-c);transform:translate(calc(4px + var(--ax)*5px),1px)}
+.lede{font-size:1.08rem;max-width:44ch;margin-bottom:22px}
+.lede strong{font-weight:700}
+.controls{display:grid;gap:14px;border:1.5px solid var(--ink);background:var(--panel);padding:16px}
+.ctl-row{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.ctl-row label{font:600 11px var(--mono);letter-spacing:.1em;text-transform:uppercase;min-width:64px}
+input[type=range]{flex:1;min-width:140px;accent-color:var(--red)}
+.btn{border:1.5px solid var(--ink);background:transparent;padding:7px 12px;font:500 12px var(--mono);letter-spacing:.04em;cursor:pointer}
+.btn:hover{background:var(--paper)}
+.btn[aria-pressed="true"]{background:var(--ink);color:var(--bg)}
+.btn.red{border-color:var(--red);color:var(--red)}
+.btn.red[aria-pressed="true"]{background:var(--red);color:var(--panel)}
+.hint{font:400 12px/1.5 var(--mono);color:var(--ink-2)}
+.ana-glasses{display:inline-flex;gap:2px;vertical-align:-2px}
+.ana-glasses i{width:10px;height:8px;border-radius:2px;display:block}
+
+.hs-switch{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px}
+.stage{position:relative;border:1.5px solid var(--ink);background:var(--panel);aspect-ratio:4/3;max-width:100%;overflow:hidden;touch-action:pan-y;cursor:grab}
+.stage:active{cursor:grabbing}
+.stage canvas{display:block;width:100%;height:100%}
+.stage .corner{position:absolute;font:500 10px var(--mono);letter-spacing:.08em;color:var(--ink-2);pointer-events:none}
+.callouts{position:absolute;inset:0;pointer-events:none}
+.callouts svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+.balloon{position:absolute;transform:translate(-50%,-50%);pointer-events:auto;width:28px;height:28px;border-radius:50%;border:1.5px solid var(--ink);background:var(--panel);font:600 12px var(--mono);cursor:pointer;display:grid;place-items:center;padding:0;transition:opacity .2s}
+.balloon.on{background:var(--red);border-color:var(--red);color:var(--panel)}
+.no3d .stage-msg{display:grid}
+.credit{margin-top:10px;font:400 11px/1.5 var(--mono);color:var(--ink-2)}
+.stage-msg{display:none;position:absolute;inset:0;place-items:center;text-align:center;padding:24px;font:500 13px var(--mono);color:var(--ink-2)}
+.partinfo{margin-top:12px;display:grid;grid-template-columns:auto 1fr;gap:4px 14px;align-items:baseline;min-height:64px;border-left:3px solid var(--red);padding:6px 0 6px 14px}
+.partinfo .n{font:800 30px/1 var(--display);color:var(--red);grid-row:span 2}
+.partinfo h3{font-size:1.05rem;font-weight:750}
+.partinfo p{color:var(--ink-2);font-size:.95rem}
+.legend{margin-top:14px;display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:6px}
+.legend button{display:flex;align-items:center;gap:8px;text-align:left;border:1px solid var(--rule-2);background:transparent;padding:6px 8px;cursor:pointer;font:500 12px/1.25 var(--mono)}
+.legend button i{font-style:normal;flex:none;width:20px;height:20px;border:1.2px solid var(--ink);border-radius:50%;display:grid;place-items:center;font-size:10px;font-weight:600}
+.legend button[aria-pressed="true"]{border-color:var(--red);background:var(--red-soft)}
+.legend button[aria-pressed="true"] i{background:var(--red);border-color:var(--red);color:var(--panel)}
+
+.facts{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border:1.5px solid var(--ink);margin-top:40px;background:var(--panel)}
+.facts div{padding:14px 16px;border-left:1px solid var(--rule-2)}
+.facts div:first-child{border-left:0}
+.facts b{display:block;font:850 clamp(1.6rem,3.4vw,2.3rem)/1 var(--display);font-variation-settings:"wdth" 115;font-variant-numeric:tabular-nums}
+.facts span{font:500 11px/1.4 var(--mono);letter-spacing:.06em;color:var(--ink-2);text-transform:uppercase}
+@media (max-width:640px){.facts{grid-template-columns:1fr 1fr}.facts div:nth-child(3){border-left:0}.facts div:nth-child(n+3){border-top:1px solid var(--rule-2)}}
+
+/* ---------- devices ---------- */
+.dev-wrap{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,6fr);gap:24px}
+@media (max-width:900px){.dev-wrap{grid-template-columns:minmax(0,1fr)}}
+.bom-scroll{overflow-x:auto;border:1.5px solid var(--ink);background:var(--panel)}
+table.bom{border-collapse:collapse;width:100%;font:400 13px/1.45 var(--mono)}
+.bom th{background:var(--ink);color:var(--bg);text-align:left;font-weight:600;font-size:10.5px;letter-spacing:.1em;padding:8px 10px}
+.bom td{padding:9px 10px;border-top:1px solid var(--rule-2);vertical-align:top}
+.bom tr.dev-row{cursor:pointer}
+.bom tr.dev-row:hover td{background:var(--paper)}
+.bom tr.dev-row[aria-selected="true"] td{background:var(--red-soft)}
+.bom tr.dev-row[aria-selected="true"] td:first-child{box-shadow:inset 3px 0 0 var(--red)}
+.bom td b{font-family:var(--display);font-weight:700;font-size:14px}
+.tag{display:inline-block;font:600 10px var(--mono);letter-spacing:.08em;padding:1px 5px;border:1px solid currentColor;margin-right:3px}
+.tag.vr{color:var(--cyan)}.tag.ar{color:var(--red)}.tag.mr{color:var(--ink-2)}
+.spec-card{border:1.5px solid var(--ink);background:var(--panel);padding:18px}
+.spec-card h3{font-size:1.5rem;font-weight:850;font-variation-settings:"wdth" 112;line-height:1.1}
+.spec-card .kind{margin:4px 0 14px}
+dl.specs{display:grid;grid-template-columns:auto 1fr;gap:6px 16px;margin:0 0 16px;font-size:.95rem}
+dl.specs dt{font:600 10.5px/2 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--ink-2)}
+dl.specs dd{margin:0}
+.est{font:500 10px var(--mono);color:var(--red);letter-spacing:.06em;margin-left:4px}
+.metric-tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px}
+.chart{display:grid;gap:10px}
+.bar-row{display:grid;grid-template-columns:118px 1fr 70px;gap:10px;align-items:center;font:500 12px var(--mono);cursor:pointer}
+.bar-track{height:18px;background:repeating-linear-gradient(90deg,var(--rule-2) 0 1px,transparent 1px 10%);position:relative;border-left:1.5px solid var(--ink)}
+.bar{height:100%;background:var(--ink-2);transition:width .5s cubic-bezier(.2,.8,.2,1)}
+.bar-row.sel .bar{background:var(--red)}
+.bar.est-bar{background:repeating-linear-gradient(135deg,var(--ink-2) 0 4px,transparent 4px 7px);outline:1px solid var(--ink-2)}
+.bar-row.sel .bar.est-bar{background:repeating-linear-gradient(135deg,var(--red) 0 4px,transparent 4px 7px);outline-color:var(--red)}
+.bar-val{text-align:right;font-variant-numeric:tabular-nums}
+.axis{display:grid;grid-template-columns:118px 1fr 70px;gap:10px;font:400 10px var(--mono);color:var(--ink-2)}
+.axis div{display:flex;justify-content:space-between}
+@media (max-width:480px){.bar-row,.axis{grid-template-columns:84px 1fr 56px;font-size:11px}}
+.chart-note{font:400 11px/1.5 var(--mono);color:var(--ink-2);margin-top:10px}
+.ws{margin-top:16px;display:flex;gap:10px 18px;flex-wrap:wrap;font:500 12.5px var(--mono);border-top:1px dashed var(--rule-2);padding-top:12px}
+.ws b{font-weight:600;color:var(--red)}
+
+/* ---------- projects ---------- */
+.proj-wrap{display:grid;grid-template-columns:minmax(0,300px) minmax(0,1fr);gap:24px}
+@media (max-width:900px){.proj-wrap{grid-template-columns:minmax(0,1fr)}}
+.proj-list{display:grid;gap:6px;align-content:start}
+@media (max-width:900px){.proj-list{grid-template-columns:repeat(auto-fill,minmax(210px,1fr))}}
+.proj-list button{display:grid;grid-template-columns:30px 1fr;gap:10px;text-align:left;border:1.5px solid var(--rule-2);background:var(--panel);padding:10px 12px;cursor:pointer;align-items:start}
+.proj-list button i{font-style:normal;width:30px;height:30px;border:1.5px solid var(--ink);border-radius:50%;display:grid;place-items:center;font:700 13px var(--mono)}
+.proj-list button b{display:block;font-weight:700;font-size:.95rem;line-height:1.25}
+.proj-list button span{font:400 11px var(--mono);color:var(--ink-2)}
+.proj-list button[aria-selected="true"]{border-color:var(--ink);box-shadow:4px 4px 0 var(--ink)}
+.proj-list button[aria-selected="true"] i{background:var(--ink);color:var(--bg)}
+.proj-list .demo-flag{color:var(--red);font-weight:600}
+.proj{border:1.5px solid var(--ink);background:var(--panel);padding:clamp(16px,3vw,26px);min-width:0}
+.proj h3{font-size:clamp(1.35rem,2.8vw,1.9rem);font-weight:850;font-variation-settings:"wdth" 112;line-height:1.1;margin:4px 0 10px}
+.credits{display:grid;grid-template-columns:auto 1fr;gap:2px 14px;font:400 12.5px/1.5 var(--mono);margin-bottom:14px}
+.credits dt{color:var(--ink-2);letter-spacing:.08em;text-transform:uppercase;font-size:10.5px;line-height:1.9}
+.credits dd{margin:0}
+.proj .sum{max-width:68ch;margin-bottom:14px}
+.proj ul{margin:0 0 14px;padding-left:18px;max-width:68ch}
+.proj ul li{margin-bottom:4px}
+.demo{margin-top:8px;border-top:1.5px dashed var(--rule-2);padding-top:16px}
+.demo-head{display:flex;justify-content:space-between;align-items:baseline;gap:10px;flex-wrap:wrap;margin-bottom:10px}
+.demo-head .label{color:var(--red)}
+.demo canvas{display:block;width:100%;max-width:100%;border:1.5px solid var(--ink);background:var(--paper);touch-action:none}
+.demo-bar{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:10px}
+.log{font:400 11.5px/1.55 var(--mono);background:var(--ink);color:var(--bg);padding:10px 12px;height:118px;overflow:auto;margin-top:10px;white-space:pre}
+.log .r{color:var(--ana-r)}.log .c{color:var(--ana-c)}
+.readout{display:flex;gap:10px 22px;flex-wrap:wrap;font:500 12px var(--mono);margin-top:10px}
+.readout b{font-variant-numeric:tabular-nums}
+.pill{display:inline-block;padding:2px 8px;font:600 11px var(--mono);letter-spacing:.08em;border:1.5px solid currentColor}
+.pill.safe{color:var(--ok)}.pill.caution{color:#C98A12}.pill.alert{color:var(--red);background:var(--red-soft)}
+.pipeline{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0;margin:0 0 14px;border:1.5px solid var(--ink)}
+.pipeline div{padding:10px 12px;border-left:1px solid var(--rule-2);font-size:.9rem}
+.pipeline div:first-child{border-left:0}
+.pipeline b{display:block;font:600 10.5px var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--cyan);margin-bottom:2px}
+@media (max-width:560px){.pipeline{grid-template-columns:1fr}.pipeline div{border-left:0;border-top:1px solid var(--rule-2)}.pipeline div:first-child{border-top:0}}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px}
+.chip{font:500 12px var(--mono);border:1px solid var(--rule-2);padding:3px 9px;background:var(--paper)}
+.photo-fig{margin:0 0 14px;border:1.5px solid var(--ink)}
+.photo-fig img{display:block;width:100%}
+.photo-fig figcaption{font:400 11px var(--mono);color:var(--ink-2);padding:6px 10px;border-top:1px solid var(--rule-2)}
+.steps{list-style:none;padding:0!important;display:grid;gap:6px;counter-reset:s}
+.steps li{margin:0!important}
+.steps button{width:100%;display:grid;grid-template-columns:26px 1fr;gap:10px;align-items:center;text-align:left;border:1px solid var(--rule-2);background:var(--paper);padding:8px 10px;cursor:pointer}
+.steps button i{font-style:normal;width:22px;height:22px;border:1.5px solid var(--ink);display:grid;place-items:center;font:600 11px var(--mono)}
+.steps button[aria-pressed="true"] i{background:var(--ok);border-color:var(--ok);color:var(--panel)}
+.steps button[aria-pressed="true"]{text-decoration:line-through;text-decoration-color:var(--ink-2);color:var(--ink-2)}
+.progress{height:8px;border:1.5px solid var(--ink);margin:10px 0 14px}
+.progress div{height:100%;background:var(--ok);transition:width .3s}
+.req{border-collapse:collapse;width:100%;font:400 12.5px/1.45 var(--mono);margin-bottom:14px}
+.req td{border:1px solid var(--rule-2);padding:6px 9px}
+.req td:first-child{color:var(--ink-2);width:36%}
+.ir-view{position:relative;aspect-ratio:16/8;max-width:100%;border:1.5px solid var(--ink);overflow:hidden;transition:background .4s}
+.ir-view svg{position:absolute;inset:0;width:100%;height:100%}
+
+/* ---------- roadmap ---------- */
+.road-grid{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:24px}
+@media (max-width:900px){.road-grid{grid-template-columns:minmax(0,1fr)}}
+.rev-scroll{overflow-x:auto}
+.timeline{position:relative;min-width:520px;padding:34px 0 8px}
+.tl-line{position:absolute;left:0;right:0;top:56px;height:0;border-top:2px solid var(--ink)}
+.tl-now{position:absolute;top:18px;bottom:-4px;width:0;border-left:2px dashed var(--red)}
+.tl-now span{position:absolute;top:-18px;left:6px;white-space:nowrap;font:600 10.5px var(--mono);color:var(--red);letter-spacing:.06em}
+.tl-years{display:grid;grid-template-columns:repeat(5,1fr);position:relative}
+.tl-years button{background:none;border:0;cursor:pointer;display:grid;justify-items:center;gap:8px;padding:0 4px;font:600 13px var(--mono)}
+.tl-years button i{width:22px;height:22px;border-radius:50%;border:2px solid var(--ink);background:var(--panel);display:block}
+.tl-years button.done i{background:var(--ink)}
+.tl-years button.now i{background:var(--red);border-color:var(--red);box-shadow:0 0 0 5px var(--red-soft)}
+.tl-years button[aria-selected="true"] span{background:var(--ink);color:var(--bg);padding:1px 6px}
+.tl-years small{font:400 10px var(--mono);color:var(--ink-2);letter-spacing:.08em}
+.rev-card{border:1.5px solid var(--ink);background:var(--panel);padding:16px 18px;margin-top:14px;display:grid;grid-template-columns:auto 1fr;gap:4px 16px}
+.rev-card .revl{grid-row:span 2;font:850 44px/1 var(--display);color:var(--red)}
+.rev-card h3{font-size:1.2rem;font-weight:750}
+.rev-card p{color:var(--ink-2)}
+.stairs{display:grid;gap:6px}
+.stairs button{display:grid;grid-template-columns:40px 1fr;align-items:center;gap:12px;text-align:left;border:1.5px solid var(--ink);background:var(--panel);cursor:pointer;padding:8px 12px;font-weight:650;transition:margin .3s}
+.stairs button i{font-style:normal;font:700 14px var(--mono);color:var(--ink-2)}
+.stairs button:nth-child(1){margin-left:0}.stairs button:nth-child(2){margin-left:6%}.stairs button:nth-child(3){margin-left:12%}.stairs button:nth-child(4){margin-left:18%}.stairs button:nth-child(5){margin-left:24%}
+.stairs button[aria-pressed="true"]{background:var(--ink);color:var(--bg)}
+.stairs button[aria-pressed="true"] i{color:var(--bg)}
+.programs{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px;margin-top:28px}
+.program{border:1.5px solid var(--ink);background:var(--panel);padding:14px 16px}
+.program .label{color:var(--red)}
+.program h3{font-size:1.05rem;font-weight:750;margin:4px 0}
+.program p{font-size:.92rem;color:var(--ink-2)}
+.obj{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px}
+.obj span{border:1.5px solid var(--ink);padding:5px 12px;font:500 13px var(--mono);background:var(--panel)}
+
+/* ---------- dedication + visit ---------- */
+.ded{display:grid;grid-template-columns:auto minmax(0,1fr);gap:28px;align-items:center}
+@media (max-width:640px){.ded{grid-template-columns:minmax(0,1fr)}}
+.ded figure{margin:0;width:190px;transform:rotate(-2deg);background:#FBF7EA;padding:9px 9px 32px;box-shadow:4px 6px 14px rgba(0,0,0,.25);position:relative}
+.ded figure::before{content:"";position:absolute;top:-10px;left:60px;width:70px;height:20px;background:rgba(210,63,41,.55);transform:rotate(3deg)}
+.ded figure img{display:block;width:100%;aspect-ratio:3/4;object-fit:cover;object-position:top;filter:sepia(.35)}
+.ded figure figcaption{position:absolute;bottom:8px;left:0;right:0;text-align:center;font:500 11px var(--mono);color:#1B2A44}
+.ded blockquote{margin:0;font-size:clamp(1.15rem,2.3vw,1.45rem);line-height:1.45;max-width:52ch;font-weight:450}
+.ded .who{margin-top:14px;font:400 13px/1.6 var(--mono);color:var(--ink-2)}
+.visit{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:24px}
+@media (max-width:760px){.visit{grid-template-columns:minmax(0,1fr)}}
+.vcard{border:1.5px solid var(--ink);background:var(--panel);padding:18px}
+.vrow{display:grid;grid-template-columns:96px 1fr auto;gap:10px;align-items:center;padding:9px 0;border-top:1px solid var(--rule-2);font:400 13.5px var(--mono)}
+.vrow:first-of-type{border-top:0}
+.vrow span:first-child{font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-2)}
+.todo{color:var(--red)}
+.copy{border:1px solid var(--rule-2);background:transparent;font:500 11px var(--mono);padding:3px 8px;cursor:pointer}
+.xr-cta h3{font-size:1.4rem;font-weight:850;font-variation-settings:"wdth" 112;margin-bottom:6px}
+.xr-cta ol{padding-left:20px;margin:10px 0 0}
+.xr-cta li{margin-bottom:6px}
+
+/* title block */
+.tblock{margin-top:56px;margin-left:auto;max-width:560px;border:2px solid var(--ink);display:grid;grid-template-columns:repeat(4,minmax(0,1fr));font:400 12px/1.4 var(--mono);background:var(--panel)}
+.tblock div{padding:7px 10px;border-left:1px solid var(--ink);border-top:1px solid var(--ink)}
+.tblock small{display:block;font-size:9.5px;letter-spacing:.1em;color:var(--ink-2)}
+.tblock .t{grid-column:span 3;border-left:0;border-top:0;font:800 15px var(--display);font-variation-settings:"wdth" 110}
+.tblock .s{border-top:0}
+.tblock .w2{grid-column:span 2}
+.tblock div:nth-child(3){border-left:0}
+
+
+
+
+
+/* ---------- laptops: keep the 3D box inside short screens ---------- */
+@media (min-width:901px){.stage{max-height:calc(100vh - 150px);min-height:340px}}
+@media (min-width:901px) and (max-width:1100px){.hero{grid-template-columns:minmax(0,4fr) minmax(0,6fr);gap:22px}.ana{font-size:clamp(3rem,7vw,4.6rem)}}
+/* ---------- tablets and phones: model first, then controls ---------- */
+@media (max-width:900px){
+  .hero{gap:16px}
+  .hero>div{display:contents}
+  .hero .eyebrow{order:1}.hero .ana{order:2;margin:2px 0 0}.hero .lede{order:3;margin:0;max-width:62ch}
+  .hero .hs-switch{order:4;margin:4px 0 0}.hero .stage{order:5}.hero .controls{order:6}
+  .hero .partinfo{order:7;margin:0}.hero .legend{order:8;margin:0}.hero .credit{order:9;margin:0}
+}
+/* ---------- phones: compact header, 3D model near the top ---------- */
+@media (max-width:640px){
+  .strip{padding-block:8px}
+  .strip-in{flex-wrap:nowrap;gap:8px}
+  .strip-in>.label{display:none}
+  .zones{gap:3px}
+  .zones a{padding:3px 7px}
+  .hero{gap:14px;padding-top:18px!important}
+  .hero .lede{font-size:1rem}
+  .hs-switch .btn{flex:1 1 calc(50% - 6px);padding:8px 6px}
+  .stage{aspect-ratio:1/1}
+  .sec-head{grid-template-columns:auto minmax(0,1fr);gap:4px 12px}
+  .zone{width:40px;height:40px;font-size:19px}
+  section{padding-block:44px 4px}
+  .facts span{display:block}
+  .dev-wrap>div:first-child{display:contents}
+  .dev-wrap{gap:16px}
+  .dev-wrap .bom-scroll{order:1}.dev-wrap .spec-card{order:2}.dev-wrap .ws{order:3;margin:0}.dev-wrap>div:first-child>div:last-child{order:4;margin:0!important}
+  .proj-list{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:8px;padding-bottom:8px;margin-inline:-16px;padding-inline:16px;scrollbar-width:thin}
+  .proj-list button{flex:0 0 72%;scroll-snap-align:start}
+  .proj-list button[aria-selected="true"]{box-shadow:3px 3px 0 var(--ink)}
+  .bar-row,.axis{grid-template-columns:78px 1fr 58px;gap:8px;font-size:11px}
+}
+/* ---------- phones: vertical timeline ---------- */
+@media (max-width:600px){
+  .timeline{min-width:0;padding:4px 0 0}
+  .tl-line,.tl-now{display:none}
+  .tl-years{grid-template-columns:minmax(0,1fr);gap:0;border-left:2px solid var(--ink);margin-left:10px}
+  .tl-years button{grid-template-columns:auto auto 1fr;justify-items:start;align-items:center;gap:10px;padding:8px 0 8px 0;margin-left:-12px;text-align:left}
+  .tl-years button.now small::after{content:" · IN PROGRESS";color:var(--red)}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}html{scroll-behavior:auto}}
+</style>
+
+</head>
+<body>
+<div class="sheet">
+  <header class="strip">
+    <div class="strip-in">
+      <span class="drg">DRG. NO. ARVR-001</span>
+      <span class="label" style="color:var(--ink)">Hirachand Daulat AR/VR Lab</span>
+      <nav class="zones" aria-label="Sections">
+        <a href="#headset"><b>A</b><span>Headset</span></a>
+        <a href="#devices"><b>B</b><span>Devices</span></a>
+        <a href="#projects"><b>C</b><span>Projects</span></a>
+        <a href="#roadmap"><b>D</b><span>Roadmap</span></a>
+        <a href="#dedication"><b>E</b><span>Dedication</span></a>
+        <a href="#visit"><b>F</b><span>Visit</span></a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ================= A · HERO ================= -->
+  <section id="headset" class="hero" style="padding-top:36px">
+    <div>
+      <p class="eyebrow">Department of Mechanical Engineering<br>COEP Technological University, Pune</p>
+      <h1 class="ana" data-t="AR/VR LAB" id="anaTitle"><span style="opacity:0">AR/VR LAB</span></h1>
+      <p class="lede">AR overlays digital content on the real world. VR puts you inside a simulated one. This lab has <strong>four headsets, a training workstation and six live projects</strong>, from surgery planning to rider safety. Pick any of the four headsets, built from real 3D product models, and take it apart.</p>
+      <div class="controls">
+        <div class="ctl-row">
+          <label for="explode">Explode</label>
+          <input id="explode" type="range" min="0" max="100" value="72" aria-describedby="explodeHint">
+        </div>
+        <div class="ctl-row">
+          <button class="btn" id="rotBtn" aria-pressed="true">Auto-sway</button>
+          <button class="btn" id="resetBtn">Reset view</button>
+          <button class="btn red" id="anaBtn" aria-pressed="false"><span class="ana-glasses" aria-hidden="true"><i style="background:var(--ana-r)"></i><i style="background:var(--ana-c)"></i></span> 3D glasses mode</button>
+        </div>
+        <p class="hint" id="explodeHint">Drag the model to turn it. Tap a numbered balloon or a part for its spec. 3D glasses mode renders a red/cyan stereo image, so the parts float off the screen if you wear anaglyph glasses.</p>
+      </div>
+    </div>
+
+    <div>
+      <div class="hs-switch" id="hsSwitch" role="group" aria-label="Choose a headset">
+        <button class="btn" data-hs="q3" aria-pressed="true">Meta Quest 3</button>
+        <button class="btn" data-hs="vive" aria-pressed="false">HTC Vive Pro 2</button>
+        <button class="btn" data-hs="hl2" aria-pressed="false">HoloLens 2</button>
+        <button class="btn" data-hs="avp" aria-pressed="false">Apple Vision Pro</button>
+      </div>
+      <div class="stage" id="stage">
+        <canvas id="hs" aria-label="Interactive exploded 3D model of the Meta Quest 3 headset"></canvas>
+        <div class="callouts" id="callouts"><svg id="leaders" aria-hidden="true"></svg></div>
+        <span class="corner" id="figLabel" style="left:10px;top:8px">FIG. 1A · META QUEST 3 · EXPLODED</span>
+        <span class="corner" style="right:10px;bottom:8px">SCALE NTS</span>
+        <div class="stage-msg" id="stageMsg">The 3D view needs WebGL, which this browser has turned off. The part list below still works.</div>
+      </div>
+      <div class="partinfo" id="partinfo" aria-live="polite"></div>
+      <div class="legend" id="legend" role="group" aria-label="Headset parts"></div>
+      <p class="credit">3D models via Sketchfab, CC BY 4.0: Meta Quest 3 by ElinHohler · HTC Vive Pro by EternalRealm (the lab's Vive Pro 2 shares its shell) · HoloLens 2 by muertoHambre · Apple Vision Pro by jnanbr07. Taken apart and prepared in Blender.</p>
+    </div>
+  </section>
+
+  <div class="facts" aria-label="Lab at a glance">
+    <div><b>4</b><span>XR headsets: VR, AR and MR</span></div>
+    <div><b>6</b><span>Research and teaching projects</span></div>
+    <div><b>1955</b><span>Year our donor's father graduated from COEP</span></div>
+    <div><b>2028</b><span>Target: industry hub for AR/VR</span></div>
+  </div>
+
+  <!-- ================= B · DEVICES ================= -->
+  <section id="devices">
+    <div class="sec-head">
+      <div class="zone">B</div>
+      <h2>Parts list: devices in the lab</h2>
+      <p>Pick a row to read its spec sheet. The chart compares all four headsets to scale; hatched bars are the manufacturer's unconfirmed figures.</p>
+    </div>
+    <div class="dev-wrap">
+      <div>
+        <div class="bom-scroll">
+          <table class="bom" id="bom" role="grid" aria-label="Devices">
+            <thead><tr><th>Item</th><th>Device</th><th>Type</th></tr></thead>
+            <tbody></tbody>
+          </table>
+        </div>
+        <div class="ws">
+          <span><b>05</b> Workstation · Intel Core i9-13900K · 64 GB RAM · Windows 11 Pro</span>
+          <span><b>06</b> NVIDIA GeForce RTX 4090 · used for model training</span>
+        </div>
+        <div style="margin-top:22px">
+          <p class="label" style="margin-bottom:10px">Compare</p>
+          <div class="metric-tabs" role="group" aria-label="Metric">
+            <button class="btn" data-m="fov" aria-pressed="true">Field of view</button>
+            <button class="btn" data-m="px" aria-pressed="false">Pixels per eye</button>
+            <button class="btn" data-m="weight" aria-pressed="false">Weight</button>
+          </div>
+          <div class="chart" id="chart"></div>
+          <p class="chart-note" id="chartNote"></p>
+        </div>
+      </div>
+      <div class="spec-card" id="spec" aria-live="polite"></div>
+    </div>
+  </section>
+
+  <!-- ================= C · PROJECTS ================= -->
+  <section id="projects">
+    <div class="sec-head">
+      <div class="zone">C</div>
+      <h2>Detail views: what we are building</h2>
+      <p>Six projects, taken from the lab's own reports. Three of them come with a small working model you can try here.</p>
+    </div>
+    <div class="proj-wrap">
+      <div class="proj-list" id="projList" role="tablist" aria-label="Projects"></div>
+      <article class="proj" id="proj" role="tabpanel"></article>
+    </div>
+  </section>
+
+  <!-- ================= D · ROADMAP ================= -->
+  <section id="roadmap">
+    <div class="sec-head">
+      <div class="zone">D</div>
+      <h2>Revision table: the five-year plan</h2>
+      <p>Each year is one revision of the lab. The red marker shows where we are today.</p>
+    </div>
+    <div class="road-grid">
+      <div>
+        <div class="rev-scroll">
+          <div class="timeline">
+            <div class="tl-line"></div>
+            <div class="tl-now" id="tlNow"><span id="tlNowLabel">TODAY</span></div>
+            <div class="tl-years" id="tlYears" role="tablist" aria-label="Plan years"></div>
+          </div>
+        </div>
+        <div class="rev-card" id="revCard" aria-live="polite"></div>
+      </div>
+      <div>
+        <p class="label" style="margin-bottom:10px">Five steps to a Centre of Excellence</p>
+        <div class="stairs" id="stairs" role="group" aria-label="Centre of Excellence steps"></div>
+        <p class="hint" id="stairNote" style="margin-top:10px"></p>
+      </div>
+    </div>
+    <p class="label" style="margin-top:36px">Five-point initiative programmes</p>
+    <div class="programs" style="margin-top:10px">
+      <div class="program"><span class="label">01</span><h3>Research</h3><p>Identify key research titles for IP generation and publications.</p></div>
+      <div class="program"><span class="label">02</span><h3>Learning and development</h3><p>Webinars, courses, FDPs and training-of-trainer sessions.</p></div>
+      <div class="program"><span class="label">03</span><h3>Consultancy</h3><p>Helping businesses adopt AR and VR.</p></div>
+      <div class="program"><span class="label">04</span><h3>Technology transfer</h3><p>Strategic partnerships with international institutes.</p></div>
+      <div class="program"><span class="label">05</span><h3>International conference</h3><p>Hosting a technical conference on AR/VR.</p></div>
+    </div>
+    <div class="obj" aria-label="Objectives">
+      <span>Innovation and research</span><span>Skill development and training</span><span>Best practices and standards</span><span>Collaboration and ecosystem building</span><span>Industry solutions, prototypes and PoCs</span><span>Market awareness and advocacy</span>
+    </div>
+  </section>
+
+  <!-- ================= E · DEDICATION ================= -->
+  <section id="dedication">
+    <div class="sec-head">
+      <div class="zone">E</div>
+      <h2>Dedication</h2>
+      <p>The lab carries the name of a COEP mechanical engineer.</p>
+    </div>
+    <div class="ded">
+      <figure><img src="founder.png" alt="Painted portrait of Shri Hirachand Daulat"><figcaption>14.04.1932 – 11.05.2021</figcaption></figure>
+      <div>
+        <blockquote>Shri Hirachand Daulat graduated in Mechanical Engineering from COEP in 1955. His children, Dr. Jaldeep and Neeta Daulat, founded this laboratory in his memory, in the department where he studied.</blockquote>
+        <p class="who">Supported by Shri Mangesh Gandhi, Mechanical Engineering, 1979.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= F · VISIT ================= -->
+  <section id="visit">
+    <div class="sec-head">
+      <div class="zone">F</div>
+      <h2>Visit the lab</h2>
+      <p>Students, faculty and industry teams are welcome. Details marked in red are still being confirmed.</p>
+    </div>
+    <div class="visit">
+      <div class="vcard">
+        <div class="vrow"><span>Where</span><span id="addr">AR/VR Lab, Dept. of Mechanical Engineering, COEP Technological University, Shivajinagar, Pune</span><button class="copy" data-copy="addr">Copy</button></div>
+        <div class="vrow"><span>Room</span><span class="todo">[Room number]</span><span></span></div>
+        <div class="vrow"><span>Timings</span><span class="todo">[Lab hours]</span><span></span></div>
+        <div class="vrow"><span>In charge</span><span class="todo">[Faculty name]</span><span></span></div>
+        <div class="vrow"><span>Email</span><span class="todo">[lab email]</span><span></span></div>
+      </div>
+      <div class="vcard xr-cta">
+        <h3>Three ways in</h3>
+        <p>The same lab, at three levels of immersion.</p>
+        <ol>
+          <li><b>WebXR:</b> scan the poster on the lab door and the lab opens in your phone's browser.</li>
+          <li><b>AR app:</b> point your phone at the poster to bring the headsets and projects into the room.</li>
+          <li><b>VR:</b> put on a Quest 3 in the lab and walk through a virtual copy of it.</li>
+        </ol>
+      </div>
+    </div>
+
+    <div class="tblock" aria-label="Title block">
+      <div class="t"><small>TITLE</small>HIRACHAND DAULAT AR/VR LAB</div>
+      <div class="s"><small>SHEET</small>1 / 1</div>
+      <div class="w2"><small>DRAWN BY</small><span class="todo">[Student names]</span></div>
+      <div><small>CHECKED</small><span class="todo">[Prof.]</span></div>
+      <div><small>REV</small>C · 2026</div>
+    </div>
+  </section>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/effects/AnaglyphEffect.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/environments/RoomEnvironment.js"></script>
+<script>
+(function(){
+"use strict";
+const root=document.documentElement;
+const reduce=matchMedia("(prefers-reduced-motion: reduce)").matches;
+const C={};
+function readTheme(){const s=getComputedStyle(root);["--ink","--ink-2","--paper","--panel","--red","--cyan","--ok","--bg","--rule-2","--ana-r","--ana-c"].forEach(k=>C[k.slice(2)]=s.getPropertyValue(k).trim());}
+readTheme();
+const themeListeners=[];
+function onTheme(){readTheme();themeListeners.forEach(f=>f());}
+matchMedia("(prefers-color-scheme: dark)").addEventListener("change",onTheme);
+new MutationObserver(onTheme).observe(root,{attributes:true,attributeFilter:["data-theme"]});
+const $=s=>document.querySelector(s);
+function h(tag,attrs,html){const e=document.createElement(tag);if(attrs)for(const k in attrs)e.setAttribute(k,attrs[k]);if(html!=null)e.innerHTML=html;return e;}
+
+/* ---------- anaglyph title parallax ---------- */
+const title=$("#anaTitle");
+if(!reduce){$("#headset").addEventListener("pointermove",e=>{const r=e.currentTarget.getBoundingClientRect();title.style.setProperty("--ax",((e.clientX-r.left)/r.width-.5).toFixed(3));});}
+
+/* ================= A · HEADSETS (real models) ================= */
+const HSINFO={
+ q3:{name:"Meta Quest 3",file:"web_models/q3.json",fig:"FIG. 1A · META QUEST 3 · EXPLODED",sel:2,parts:[
+  ["Head strap","Holds the 500 g headset steady for 2–3 hour sessions."],
+  ["Facial interface","Cushions the face and seals out room light so the virtual scene fills your view."],
+  ["Pancake lenses and LCDs","2064 × 2208 pixels per eye behind slim pancake lenses. 110° field of view, 90 Hz with 120 Hz available."],
+  ["Chassis and Snapdragon XR2 Gen 2","Runs every app on the headset itself. Link or Air Link connects it to the lab PC for PC VR."],
+  ["Housing","Holds the battery for 2–3 hours of untethered use."],
+  ["Front cover and sensor pills","Colour passthrough cameras and a depth sensor give mixed reality, inside-out 6DoF tracking and hand tracking."]]},
+ vive:{name:"HTC Vive Pro series",file:"web_models/vive.json",fig:"FIG. 1B · HTC VIVE PRO SERIES · EXPLODED",sel:5,parts:[
+  ["Rear pad and fit dial","Turn the dial to tighten the fit around the head."],
+  ["Rear cradle","Padding spreads the 850 g headset across the back of the head."],
+  ["Top strap","Takes weight off the face during long sessions."],
+  ["Built-in headphones","Flip-down headphones for positional audio."],
+  ["Body and face cushion","Holds the displays and lenses: on the lab's Vive Pro 2, 2448 × 2448 per eye (5K) with a 120° view. A cable connects it to the i9-13900K PC."],
+  ["Front shell","Sensors catch sweeps from the Lighthouse base stations for precise 6DoF tracking; twin front cameras see the room."]]},
+ hl2:{name:"Microsoft HoloLens 2",file:"web_models/hl2.json",fig:"FIG. 1C · MICROSOFT HOLOLENS 2 · EXPLODED",sel:5,parts:[
+  ["Battery pack and dial","Sits at the back to balance the headset (about 566 g). The dial adjusts the fit. No PC or cable needed."],
+  ["Rear housing","Carries the battery and electronics at the back of the band."],
+  ["Headband","Wraps around the head so the display sits in front of your eyes."],
+  ["Brow pad and compute","A Snapdragon 850 runs mixed reality apps on the headset; the pad rests on the forehead."],
+  ["Sensor bar and light engines","Tracking and depth cameras give 6DoF and hand tracking; 2K 3:2 light engines project holograms at 2048 × 1080 per eye."],
+  ["Visor and waveguides","Clear waveguides carry holograms to your eyes while you still see the room. Field of view about 52°. Control is by hand, eye and voice."]]},
+ avp:{name:"Apple Vision Pro",file:"web_models/avp.json",fig:"FIG. 1D · APPLE VISION PRO · EXPLODED",sel:4,parts:[
+  ["Solo Knit Band and Fit Dial","Spreads the weight (500–600 g, unconfirmed) across the back of the head."],
+  ["Audio straps","Speakers in the strap arms play spatial audio close to your ears."],
+  ["Cushion","Soft layer between the light seal and your face."],
+  ["Light seal","Blocks outside light and fits the shape of the face."],
+  ["Lens and display modules","Micro-OLED displays, about 4K per eye (estimated), fill a field of view of about 120° (estimated)."],
+  ["Aluminium frame, M2 and R1","M2 runs apps; R1 processes camera and sensor input with very low delay."],
+  ["Glass front","A curved laminated glass front covers the camera and sensor array."]]}
+};
+let curHs="q3",selPart=2;
+const legend=$("#legend");
+function renderLegend(){legend.innerHTML="";HSINFO[curHs].parts.forEach((p,i)=>{const b=h("button",{type:"button","aria-pressed":"false"},`<i>${i+1}</i>${p[0]}`);b.addEventListener("click",()=>selectPart(i));legend.appendChild(b);});}
+function selectPart(i){selPart=i;const p=HSINFO[curHs].parts[i];$("#partinfo").innerHTML=`<span class="n">${i+1}</span><h3>${p[0]}</h3><p>${p[1]}</p>`;[...legend.children].forEach((b,j)=>b.setAttribute("aria-pressed",j===i?"true":"false"));if(window.__hsSel)window.__hsSel(i);}
+function setHeadset(key){curHs=key;document.querySelectorAll("#hsSwitch .btn").forEach(b=>b.setAttribute("aria-pressed",String(b.dataset.hs===key)));$("#figLabel").textContent=HSINFO[key].fig;$("#hs").setAttribute("aria-label","Interactive exploded 3D model of the "+HSINFO[key].name);renderLegend();selectPart(HSINFO[key].sel);if(window.__hsBuild)window.__hsBuild(key);}
+document.querySelectorAll("#hsSwitch .btn").forEach(b=>b.addEventListener("click",()=>setHeadset(b.dataset.hs)));
+
+(function initHeadset(){
+  const stage=$("#stage"),cv=$("#hs"),callouts=$("#callouts"),leaders=$("#leaders"),msg=$("#stageMsg");
+  function say(t){msg.textContent=t;stage.classList.toggle("no3d",!!t);}
+  if(!window.THREE||!THREE.GLTFLoader){say("The 3D view could not load in this browser. The part list below still works.");return;}
+  let renderer;
+  try{renderer=new THREE.WebGLRenderer({canvas:cv,antialias:true});}catch(e){say("The 3D view needs WebGL, which this browser has turned off. The part list below still works.");return;}
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio||1,2));
+  renderer.outputEncoding=THREE.sRGBEncoding;
+  renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=1.05;
+  const scene=new THREE.Scene();
+  if(THREE.RoomEnvironment){const pm=new THREE.PMREMGenerator(renderer);scene.environment=pm.fromScene(new THREE.RoomEnvironment(),0.04).texture;}
+  scene.add(new THREE.HemisphereLight(0xffffff,0x9a9a9a,.55));
+  const dl=new THREE.DirectionalLight(0xffffff,.9);dl.position.set(-3,5,6);scene.add(dl);
+  const camera=new THREE.PerspectiveCamera(30,4/3,.1,100);
+  const rig=new THREE.Group();scene.add(rig);
+  let effect=null;
+  if(THREE.AnaglyphEffect){try{effect=new THREE.AnaglyphEffect(renderer);}catch(e){effect=null;}}
+  if(!effect){$("#anaBtn").disabled=true;$("#anaBtn").title="Not available in this browser";}
+
+  const loader=new THREE.GLTFLoader();const cache={};
+  // Textures are separate .jpg/.png files in web_models/, loaded through <img>;
+  // hiding createImageBitmap while the parser is created makes GLTFLoader pick TextureLoader.
+  // Models are glTF JSON with the binary buffer embedded as base64. Rebuild a GLB in memory
+  // so the loader never has to fetch a data: URI (blocked by the page's content policy).
+  async function loadModel(url){
+    const r=await fetch(url);if(!r.ok)throw new Error("HTTP "+r.status);
+    const js=await r.json();const buf=js.buffers[0];const b64=buf.uri.slice(buf.uri.indexOf(",")+1);delete buf.uri;
+    const bin=Uint8Array.from(atob(b64),c=>c.charCodeAt(0));
+    const enc=new TextEncoder();let jb=enc.encode(JSON.stringify(js));
+    const jpad=(4-jb.length%4)%4,bpad=(4-bin.length%4)%4;
+    const total=12+8+jb.length+jpad+8+bin.length+bpad;
+    const out=new ArrayBuffer(total),dv=new DataView(out),u8=new Uint8Array(out);
+    dv.setUint32(0,0x46546C67,true);dv.setUint32(4,2,true);dv.setUint32(8,total,true);
+    let o=12;dv.setUint32(o,jb.length+jpad,true);dv.setUint32(o+4,0x4E4F534A,true);o+=8;u8.set(jb,o);u8.fill(0x20,o+jb.length,o+jb.length+jpad);o+=jb.length+jpad;
+    dv.setUint32(o,bin.length+bpad,true);dv.setUint32(o+4,0x004E4942,true);o+=8;u8.set(bin,o);
+    return out;
+  }
+
+  const S=18; // model is 0.3 m long -> 5.4 scene units
+  let groups=[],pickables=[],balloons=[],lines=[],model=null,loadingKey=null;
+  let explode=+$("#explode").value/100,target=explode,auto=!reduce,ana=false,sel=0;
+  let yaw=-.42,pitch=.18,w=10,hh=10,t0=performance.now(),visible=true;
+  $("#rotBtn").setAttribute("aria-pressed",String(auto));
+  const red=new THREE.Color();
+  function applyTheme(){scene.background=new THREE.Color(C.panel);red.set(C.red);
+    groups.forEach((g,i)=>g.mats.forEach(m=>{if(!m.emissive)return;if(i===sel){m.emissive.copy(red);m.emissiveIntensity=.45;}else{m.emissive.copy(m.userData.e0);m.emissiveIntensity=m.userData.ei0;}}));
+    lines.forEach(l=>l.setAttribute("stroke",C.ink));}
+  themeListeners.push(applyTheme);
+  window.__hsSel=i=>{sel=i;applyTheme();balloons.forEach((b,j)=>b.classList.toggle("on",j===i));};
+
+  function prepare(gltf){
+    const root=gltf.scene;const parts={};
+    root.children.slice().forEach(node=>{
+      const ud=node.userData||{};const g=ud.g||1;
+      node.userData.base=node.position.clone();node.userData.exy=ud.exy||0;node.userData.exz=ud.exz||0;
+      const box=new THREE.Box3();
+      node.traverse(o=>{if(o.isMesh){o.material=o.material.clone();const m=o.material;if(m.emissive){m.userData.e0=m.emissive.clone();m.userData.ei0=m.emissiveIntensity;}o.userData.g=g;o.geometry.computeBoundingBox();const bb=o.geometry.boundingBox.clone();if(o!==node)bb.applyMatrix4(o.matrix);box.union(bb);}});
+      node.userData.center=box.getCenter(new THREE.Vector3());node.userData.size=box.getSize(new THREE.Vector3()).length();
+      (parts[g]=parts[g]||{nodes:[],mats:[]}).nodes.push(node);
+      node.traverse(o=>{if(o.isMesh)parts[g].mats.push(o.material);});
+    });
+    const whole=new THREE.Box3().setFromObject(root);const c=whole.getCenter(new THREE.Vector3());
+    const holder=new THREE.Group();root.position.sub(c);holder.add(root);holder.scale.setScalar(S);holder.rotation.y=Math.PI/2;
+    const n=Math.max(...Object.keys(parts).map(Number));
+    const list=[];for(let i=1;i<=n;i++)list.push(parts[i]||{nodes:[],mats:[]});
+    return {holder,list};
+  }
+  function mount(key){
+    const m=cache[key];if(loadingKey!==key)return;
+    if(model)rig.remove(model.holder);
+    model=m;rig.add(m.holder);groups=m.list;pickables=[];if(!m.fit)measure(m);camDist=0;
+    groups.forEach(g=>g.nodes.forEach(n=>n.traverse(o=>{if(o.isMesh)pickables.push(o);})));
+    balloons.forEach(b=>b.remove());lines.forEach(l=>l.remove());
+    const info=HSINFO[key].parts;
+    balloons=groups.map((g,i)=>{const b=h("button",{type:"button",class:"balloon","aria-label":`Part ${i+1}: ${info[i]?info[i][0]:""}`},String(i+1));b.addEventListener("click",e=>{e.stopPropagation();selectPart(i);});callouts.appendChild(b);return b;});
+    lines=groups.map(()=>{const l=document.createElementNS("http://www.w3.org/2000/svg","line");l.setAttribute("stroke-width","1");leaders.appendChild(l);return l;});
+    explode=0;target=.72;$("#explode").value=72;yaw=-.42;pitch=.18;t0=performance.now();
+    say("");sel=selPart;applyTheme();balloons.forEach((b,j)=>b.classList.toggle("on",j===sel));
+  }
+  function place(list,e){list.forEach(g=>g.nodes.forEach(n=>{const b=n.userData.base;n.position.set(b.x,b.y+n.userData.exz*e,b.z-n.userData.exy*e);}));}
+  // Measure the model's bounding sphere assembled (e=0) and fully exploded (e=1), in rig space,
+  // so the camera can keep the whole model in frame at any explode level and any rotation.
+  function measure(m){
+    const rot=rig.rotation.clone();rig.rotation.set(0,0,0);m.holder.position.set(0,0,0);
+    const f=[0,1].map(e=>{place(m.list,e);rig.updateMatrixWorld(true);return new THREE.Box3().setFromObject(m.holder);});
+    rig.rotation.copy(rot);m.fit=f;
+  }
+  const camDir=new THREE.Vector3(0,2.0,15.5).normalize();let camDist=0;const fc=new THREE.Vector3();
+  // camera basis (right, up, back) for the fixed viewing direction
+  const basis=(()=>{const c=new THREE.PerspectiveCamera();c.position.copy(camDir);c.lookAt(0,0,0);c.updateMatrixWorld();const e=c.matrixWorld.elements;return[new THREE.Vector3(e[0],e[1],e[2]),new THREE.Vector3(e[4],e[5],e[6]),new THREE.Vector3(e[8],e[9],e[10])];})();
+  const fitE=new THREE.Euler(),bmin=new THREE.Vector3(),bmax=new THREE.Vector3(),half=new THREE.Vector3(),corner=new THREE.Vector3();
+  const FRAME_V=.74,FRAME_H=.93; // share of the box the model may fill (leaves the balloon rows free)
+  window.__hsBuild=key=>{
+    loadingKey=key;
+    if(cache[key]){mount(key);return;}
+    if(model){rig.remove(model.holder);model=null;groups=[];balloons.forEach(b=>b.remove());lines.forEach(l=>l.remove());balloons=[];lines=[];}
+    say("Loading the "+HSINFO[key].name+" model…");stage.classList.remove("no3d");msg.style.display="grid";
+    loadModel(HSINFO[key].file).then(buf=>new Promise((res,rej)=>{const cib=window.createImageBitmap;try{window.createImageBitmap=undefined;loader.parse(buf,"web_models/",res,rej);}finally{window.createImageBitmap=cib;}})).then(g=>{cache[key]=prepare(g);msg.style.display="";mount(key);}).catch(err=>{console.error(err);const why=err&&err.message?err.message:(err&&err.type==="error"?"a texture image was blocked":String(err));say("The model could not be loaded ("+why+"). The part list below still works.");});
+  };
+
+  function resize(){w=stage.clientWidth;hh=stage.clientHeight;if(!w||!hh)return;renderer.setSize(w,hh,false);camera.aspect=w/hh;camera.position.set(0,2.0,15.5);camera.lookAt(0,0,0);camera.updateProjectionMatrix();if(effect)effect.setSize(w,hh);}
+  new ResizeObserver(resize).observe(stage);resize();
+  new IntersectionObserver(es=>{visible=es[0].isIntersecting;},{threshold:0}).observe(stage);
+
+  $("#explode").addEventListener("input",e=>{target=e.target.value/100;});
+  $("#rotBtn").addEventListener("click",e=>{auto=!auto;e.currentTarget.setAttribute("aria-pressed",String(auto));});
+  $("#resetBtn").addEventListener("click",()=>{yaw=-.42;pitch=.18;target=.72;$("#explode").value=72;t0=performance.now();});
+  $("#anaBtn").addEventListener("click",e=>{ana=!ana;e.currentTarget.setAttribute("aria-pressed",String(ana));callouts.style.visibility=ana?"hidden":"visible";});
+
+  const ray=new THREE.Raycaster(),mv=new THREE.Vector2();let down=null;
+  stage.addEventListener("pointerdown",e=>{if(e.target.classList.contains("balloon"))return;down={x:e.clientX,y:e.clientY,yaw,pitch,moved:false};stage.setPointerCapture(e.pointerId);});
+  stage.addEventListener("pointermove",e=>{if(!down)return;const dx=e.clientX-down.x,dy=e.clientY-down.y;if(Math.abs(dx)+Math.abs(dy)>4)down.moved=true;yaw=down.yaw+dx*.008;pitch=Math.max(-.5,Math.min(.8,down.pitch+dy*.005));t0=performance.now();});
+  stage.addEventListener("pointerup",e=>{if(!down)return;if(!down.moved&&pickables.length){const r=cv.getBoundingClientRect();mv.set(((e.clientX-r.left)/r.width)*2-1,-((e.clientY-r.top)/r.height)*2+1);ray.setFromCamera(mv,camera);const hit=ray.intersectObjects(pickables,false)[0];if(hit)selectPart(hit.object.userData.g-1);}down=null;});
+  stage.addEventListener("pointercancel",()=>{down=null;});
+
+  const tmp=new THREE.Vector3(),acc=new THREE.Vector3();
+  function proj(v){tmp.copy(v).project(camera);return[(tmp.x+1)/2*w,(1-tmp.y)/2*hh];}
+  function frame(now){
+    requestAnimationFrame(frame);
+    if(!visible)return;
+    explode+=(target-explode)*.12;
+    const sway=(auto&&!down)?Math.sin((now-t0)/1000*.45)*.38:0;
+    rig.rotation.set(pitch,yaw+sway,0);
+    place(groups,explode);
+    if(model&&model.fit){
+      const f=model.fit;bmin.lerpVectors(f[0].min,f[1].min,explode);bmax.lerpVectors(f[0].max,f[1].max,explode);
+      fc.addVectors(bmin,bmax).multiplyScalar(.5);model.holder.position.copy(fc).negate();half.subVectors(bmax,bmin).multiplyScalar(.5);
+      // tightest camera distance that keeps every corner of the rotated box inside the allowed share of the view
+      const tv=Math.tan(THREE.MathUtils.degToRad(camera.fov)/2)*FRAME_V,th=Math.tan(THREE.MathUtils.degToRad(camera.fov)/2)*camera.aspect*FRAME_H;
+      let d=0;const sw=(auto&&!down)?[-.38,0,.38]:[0];
+      for(const s of sw){fitE.set(pitch,yaw+s,0);
+        for(let i=0;i<8;i++){corner.set(i&1?half.x:-half.x,i&2?half.y:-half.y,i&4?half.z:-half.z).applyEuler(fitE);
+          const x=corner.dot(basis[0]),y=corner.dot(basis[1]),z=corner.dot(basis[2]);d=Math.max(d,z+Math.abs(x)/th,z+Math.abs(y)/tv);}}
+      camDist=camDist?camDist+(d-camDist)*.15:d;camera.position.copy(camDir).multiplyScalar(camDist);camera.lookAt(0,0,0);
+    }
+    rig.updateMatrixWorld(true);
+    const op=Math.max(0,Math.min(1,(explode-.2)/.25));
+    const topY=hh*.1,botY=hh*.9;
+    groups.forEach((g,i)=>{
+      if(!g.nodes.length||!balloons[i])return;
+      let best=null,sz=-1;g.nodes.forEach(n=>{if(n.userData.size>sz){sz=n.userData.size;best=n;}});
+      acc.copy(best.userData.center).applyMatrix4(best.matrixWorld);
+      const a=proj(acc);const up=i%2===0;const bx=Math.max(18,Math.min(w-18,a[0])),by=up?topY:botY;
+      const bl=balloons[i];bl.style.left=bx+"px";bl.style.top=by+"px";bl.style.opacity=op;bl.style.pointerEvents=op>.5?"auto":"none";bl.tabIndex=op>.5?0:-1;
+      const l=lines[i];l.setAttribute("x1",a[0]);l.setAttribute("y1",a[1]);l.setAttribute("x2",bx);l.setAttribute("y2",by+(up?14:-14));l.setAttribute("opacity",op);
+    });
+    if(ana&&effect)effect.render(scene,camera);else renderer.render(scene,camera);
+  }
+  requestAnimationFrame(frame);
+})();
+setHeadset("q3");
+
+
+/* ================= B · DEVICES ================= */
+const DEV=[
+ {id:"q3",name:"Meta Quest 3",tags:["vr","mr"],kind:"Standalone VR headset, also connects to a PC",fov:110,px:2064*2208,pxL:"2064 × 2208",weight:500,
+  rows:[["Display","Dual LCD, 2064 × 2208 per eye"],["Refresh","90 Hz, 120 Hz possible"],["Field of view","110°"],["Tracking","Inside-out 6DoF, hand tracking"],["Processor","Snapdragon XR2 Gen 2"],["Input","Touch Plus controllers"],["Battery","2–3 hours standalone"],["Weight","500 g"]],
+  use:"Colour passthrough for mixed reality, Meta's app library, and PC VR through Link or Air Link. Used in the lab for VR cobot control."},
+ {id:"vive",name:"HTC Vive Pro 2",tags:["vr"],kind:"PC-tethered VR headset",fov:120,px:2448*2448,pxL:"2448 × 2448",weight:850,
+  rows:[["Display","Dual RGB LCD, 2448 × 2448 per eye (5K total)"],["Refresh","90 / 120 Hz"],["Field of view","120°"],["Tracking","Lighthouse base stations, 6DoF"],["Processor","Runs on the lab's i9-13900K PC"],["Input","Vive or SteamVR controllers, incl. Valve Index"],["Weight","850 g"]],
+  use:"External tracking gives very accurate motion. Suited to simulators and professional work that needs the sharpest image."},
+ {id:"hl2",name:"Microsoft HoloLens 2",tags:["ar"],kind:"Standalone AR headset",fov:52,px:2048*1080,pxL:"2048 × 1080",weight:566,
+  rows:[["Display","2K 3:2 light engines, 2048 × 1080 per eye"],["Field of view","About 52°"],["Tracking","Inside-out 6DoF, eye tracking"],["Processor","Snapdragon 850"],["Input","Hands, eyes and voice; no controllers"],["Weight","About 566 g"]],
+  use:"Holograms placed in the real room, operated hands-free. Built for enterprise and industrial use."},
+ {id:"avp",name:"Apple Vision Pro",tags:["mr"],kind:"Mixed reality headset (AR + VR)",fov:120,px:3840*2160,pxL:"≈ 4K (est.)",weight:550,est:{fov:1,px:1,weight:1},
+  rows:[["Display","Micro-OLED, about 4K per eye (estimated)"],["Refresh","90 Hz, higher in some modes"],["Field of view","About 120° (estimated)"],["Tracking","Inside-out cameras; hand, eye and voice"],["Processor","Apple M2 + R1"],["Input","Hands, eyes and voice; no controllers"],["Weight","500–600 g (not confirmed)"]],
+  use:"Full-colour passthrough blending AR and VR, designed for both productivity and entertainment."}
+];
+const METRIC={fov:{max:130,ticks:[0,30,60,90,120],fmt:v=>v+"°",note:"Horizontal field of view in degrees. Wider means more of your vision is covered."},
+  px:{max:9e6,ticks:[0,3e6,6e6,9e6],fmt:v=>(v/1e6).toFixed(1)+" MP",tick:v=>(v/1e6)+" MP",note:"Pixels per eye, in megapixels. More pixels give sharper text and detail."},
+  weight:{max:900,ticks:[0,300,600,900],fmt:v=>v+" g",tick:v=>v+" g",note:"Headset weight in grams. Lighter is more comfortable in long sessions."}};
+let devSel=0,metric="fov";
+const bomBody=$("#bom tbody");
+DEV.forEach((d,i)=>{const tr=h("tr",{class:"dev-row",tabindex:"0","aria-selected":"false"},`<td>0${i+1}</td><td><b>${d.name}</b></td><td>${d.tags.map(t=>`<span class="tag ${t}">${t.toUpperCase()}</span>`).join("")}</td>`);
+  tr.addEventListener("click",()=>selDev(i));tr.addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();selDev(i);}});bomBody.appendChild(tr);});
+function selDev(i){devSel=i;const d=DEV[i];[...bomBody.children].forEach((r,j)=>r.setAttribute("aria-selected",j===i?"true":"false"));
+  $("#spec").innerHTML=`<p class="label">Item 0${i+1}</p><h3>${d.name}</h3><p class="kind">${d.tags.map(t=>`<span class="tag ${t}">${t.toUpperCase()}</span>`).join("")} ${d.kind}</p><dl class="specs">${d.rows.map(r=>`<dt>${r[0]}</dt><dd>${r[1]}</dd>`).join("")}</dl><p>${d.use}</p><button class="btn red" type="button" id="takeApart" style="margin-top:16px">Take it apart in 3D ↑</button>`;$("#takeApart").addEventListener("click",()=>{setHeadset(d.id);document.getElementById("headset").scrollIntoView({behavior:reduce?"auto":"smooth"});});drawChart();}
+function drawChart(){const M=METRIC[metric];const ch=$("#chart");ch.innerHTML="";
+  DEV.forEach((d,i)=>{const v=d[metric],est=d.est&&d.est[metric];const row=h("div",{class:"bar-row"+(i===devSel?" sel":"")},`<span>${d.name.replace("Microsoft ","")}</span><div class="bar-track"><div class="bar${est?" est-bar":""}" style="width:0%"></div></div><span class="bar-val">${M.fmt(v)}${est?'<span class="est">est</span>':""}</span>`);
+    row.addEventListener("click",()=>selDev(i));ch.appendChild(row);requestAnimationFrame(()=>{row.querySelector(".bar").style.width=(v/M.max*100)+"%";});});
+  const ax=h("div",{class:"axis"},`<span></span><div>${M.ticks.map(t=>`<span>${(M.tick||M.fmt)(t)}</span>`).join("")}</div><span></span>`);ch.appendChild(ax);$("#chartNote").textContent=M.note;}
+document.querySelectorAll(".metric-tabs .btn").forEach(b=>b.addEventListener("click",()=>{metric=b.dataset.m;document.querySelectorAll(".metric-tabs .btn").forEach(x=>x.setAttribute("aria-pressed",String(x===b)));drawChart();}));
+selDev(0);
+
+/* ================= C · PROJECTS ================= */
+function setupCanvas(cv,W,H){const d=Math.min(window.devicePixelRatio||1,2);cv.width=W*d;cv.height=H*d;cv.style.aspectRatio=W+"/"+H;const ctx=cv.getContext("2d");ctx.setTransform(d,0,0,d,0,0);return ctx;}
+function toLocal(cv,W,e){const r=cv.getBoundingClientRect();const s=W/r.width;return[(e.clientX-r.left)*s,(e.clientY-r.top)*s];}
+function logLine(el,txt,cls){const s=h("span",cls?{class:cls}:null);s.textContent=txt+"\n";el.appendChild(s);while(el.childNodes.length>60)el.removeChild(el.firstChild);el.scrollTop=el.scrollHeight;}
+let stopDemo=null;
+
+const PROJ=[
+ {key:"cobot",short:"VR control of a cobot",meta:"Quest 3 · robotics",demo:true,
+  title:"VR control of a collaborative robot",
+  credits:[["Team","Viraj Bakshi, Prasad Patil, Amit Deshmukh, Pratiksha Jawale (research scholar)"],["Guide","Dr. Shantipal S. Ohol"],["Kit","Meta Quest 3, Unity, collaborative robot arm"]],
+  body:`<p class="sum">VR joins voice, gesture and joystick as a new way to command the lab's collaborative robot. The operator moves a virtual copy of the arm with Quest 3 controllers. Each hand movement becomes a position delta (<span class="mono">DELTA</span>) sent to the real robot; two buttons send <span class="mono">GRIP_OPEN</span> and <span class="mono">GRIP_CLOSE</span>; the robot reports its position back (<span class="mono">CUR_POS</span>) so the virtual arm always matches the real one.</p>
+  <figure class="photo-fig"><img src="vrscene.png" alt="VR scene in Unity showing a robot arm with communication, position and joint control panels, operated with Quest controllers"><figcaption>VR scene built in Unity: communication, position and joint control panels</figcaption></figure>
+  <ul><li>Better sense of the arm's position and path than voice or gesture control.</li><li>Natural hand motion is easier to learn than a joystick.</li><li>Direct visual feedback, at the cost of a little extra setup for headset calibration.</li></ul>`,
+  demoTitle:"Try it: drive the arm",demoHint:"Drag inside the workspace, or use arrow keys. Dashed: your virtual command. Solid: the real arm following."},
+ {key:"glasses",short:"AI glasses for riders",meta:"Wearable ADAS · safety",demo:true,
+  title:"AI glasses for smart mobility and situational intelligence",
+  credits:[["Group","AR/VR Lab, Mechanical Engineering"],["Stack","YOLO detection, edge AI, IMU and GPS, AI glasses"]],
+  body:`<p class="sum">Two-wheelers are nearly two-thirds of vehicles on Indian roads and a major share of road deaths, yet driver-assist systems are rare on them. This wearable watches the road through a vehicle camera, predicts collision risk, speaks alerts into the rider's AI glasses, and sends an automatic SOS with GPS location if it detects a crash.</p>
+  <div class="pipeline"><div><b>Perception</b>Camera feed; deep-learning detection of vehicles, pedestrians and obstacles.</div><div><b>Intelligence</b>Distance from box size, speed and trajectory; accelerometer and gyroscope crash detection.</div><div><b>Interface</b>Audio warnings in the glasses; automatic SOS with location.</div></div>
+  <ul><li>Accurate real-time detection with few false alerts, tested on the road and in controlled runs.</li><li>SOS sent within seconds of a detected crash.</li><li>Robust across traffic and lighting conditions, with minimal rider distraction.</li></ul>`,
+  demoTitle:"Try it: rear-view risk monitor",demoHint:"Distance is estimated from bounding-box size, as in the project. Watch the alert level, then simulate a crash."},
+ {key:"mri",short:"MRI overlay for surgery",meta:"Medical AR · registration",demo:true,
+  title:"Superimposing MRI data for pre-surgical decisions",
+  credits:[["Researcher","Sharanya R. Dumbre Patil, M.Tech (2nd year), Instrumentation"],["Supervisor","Prof. U. M. Chaskar"]],
+  body:`<p class="sum">Surgeons plan an approach more confidently when the scan sits on the patient. Fiducial markers map virtual coordinates to real ones. Point pairs are picked, locked and aligned in an interactive UI; a rigid fit is computed with the SVD-based Kabsch algorithm, then refined with Iterative Closest Point, and registration accuracy is measured.</p>`,
+  demoTitle:"Try it: register the scan",demoHint:"Drag the blue MRI overlay and turn it with the slider to line up the four markers, then let Kabsch solve it."},
+ {key:"drone",short:"Drone detection",meta:"Computer vision · RGB + IR",
+  title:"Drone identification, detection, threat classification and response",
+  credits:[["Researcher","Vaishnavi Taware"],["Guide","Prof. Sunil G. Bhirud"],["Compute","NVIDIA GeForce RTX 4090"]],
+  body:`<p class="sum">The first step is reliable detection by day and night. Extra-large variants of six YOLO generations are trained and compared on RGB and infrared drone datasets to find the most accurate, robust model for both.</p>
+  <p class="label" style="margin-bottom:8px">Models under evaluation</p><div class="chips"><span class="chip">YOLOv8-X</span><span class="chip">YOLOv9-X</span><span class="chip">YOLOv10-X</span><span class="chip">YOLOv11-X</span><span class="chip">YOLOv12-X</span><span class="chip">YOLO26-X</span></div>
+  <p class="label" style="margin-bottom:8px">Compared on</p><div class="chips"><span class="chip">Precision</span><span class="chip">Recall</span><span class="chip">mAP@50</span><span class="chip">mAP@50–95</span><span class="chip">Inference time</span><span class="chip">Computational complexity</span></div>
+  <div class="demo"><div class="demo-head"><span class="label">Two sensors, one target</span><span class="demo-bar" style="margin:0"><button class="btn" id="rgbBtn" aria-pressed="true">RGB</button><button class="btn" id="irBtn" aria-pressed="false">Infrared</button></span></div>
+  <div class="ir-view" id="irView"></div><p class="hint" style="margin-top:8px">Illustration: in infrared the sky goes dark and the drone's warm motors stand out, which is why the models are tested on both.</p></div>`},
+ {key:"rear",short:"Rear-view object detection",meta:"Computer vision · two-wheelers",
+  title:"Critical object detection for the rear view of two-wheelers",
+  credits:[["Student","Aditya Rahalkar, B.Tech Mechanical"],["Guides","Dr. S. S. Pardeshi, Dr. Sangeeta Mundra"]],
+  body:`<p class="sum">Computer vision that watches the road behind the rider. A YOLOv8 model with tracking detects heavy vehicles, cars, auto-rickshaws and two-wheelers on Indian streets.</p>
+  <figure class="photo-fig"><img src="road.png" alt="Four Pune street scenes with bounding boxes labelling buses, cars, auto-rickshaws and two-wheelers with confidence scores and tracking IDs"><figcaption>Detection and tracking on Pune streets</figcaption></figure>
+  <div class="chips"><span class="chip">HMV · heavy vehicle</span><span class="chip">LMV · car</span><span class="chip">RICK · auto-rickshaw</span><span class="chip">TW · two-wheeler</span></div>
+  <p>The dataset was built for vehicle mix, lighting conditions, augmentation and annotation. Across all classes the model reaches an <b>F1 score of 0.90</b> at a confidence threshold of 0.469.</p>`},
+ {key:"elective",short:"AR-VR elective with Unity",meta:"Teaching · final-year R&amp;AI",
+  title:"AR-VR elective, final-year B.Tech (Robotics and AI)",
+  credits:[["Faculty","Dr. Shubhangi Abhijit Deshmukh, Assistant Professor, E&amp;TC"],["Tools","Unity 6 (one-year learning licence), open-source tools"]],
+  body:`<p class="sum">Human-computer interaction and computer vision on the technical side; animation and computer graphics on the creative side. Students build working application executables, not just assignments.</p>
+  <p class="label">Course path · tick off as you go</p><div class="progress" aria-hidden="true"><div id="stepBar" style="width:0%"></div></div>
+  <ol class="steps" id="steps"></ol>
+  <p class="label" style="margin:16px 0 8px">Unity 6 minimum spec</p>
+  <table class="req"><tr><td>OS</td><td>64-bit</td></tr><tr><td>Memory</td><td>8 GB RAM</td></tr><tr><td>Graphics</td><td>DX10, DX11, DX12 or Vulkan; NVIDIA RTX 3050 or newer recommended</td></tr><tr><td>Storage</td><td>At least 50 GB free</td></tr></table>
+  <ul><li>In progress: approval for project-based evaluation in place of the theory paper.</li><li>Industry link: talks on training and internships with Who VR CEO Mr. Ajit Padmnabh and Dr. Chaugule, Head of Mechanical Engineering.</li></ul>`}
+];
+const projList=$("#projList");
+PROJ.forEach((p,i)=>{const b=h("button",{type:"button",role:"tab",id:"tab-"+p.key,"aria-selected":"false","aria-controls":"proj"},`<i>${String.fromCharCode(65+i)}</i><span><b>${p.short}</b><span>${p.meta}${p.demo?' · <span class="demo-flag">try it</span>':""}</span></span>`);b.addEventListener("click",()=>selProj(i));projList.appendChild(b);});
+projList.addEventListener("keydown",e=>{const tabs=[...projList.children];const i=tabs.indexOf(document.activeElement);if(i<0)return;let j=null;if(e.key==="ArrowDown"||e.key==="ArrowRight")j=(i+1)%tabs.length;if(e.key==="ArrowUp"||e.key==="ArrowLeft")j=(i-1+tabs.length)%tabs.length;if(j!=null){e.preventDefault();tabs[j].focus();selProj(j);}});
+function selProj(i){if(stopDemo){stopDemo();stopDemo=null;}const p=PROJ[i];[...projList.children].forEach((b,j)=>{b.setAttribute("aria-selected",j===i?"true":"false");b.tabIndex=j===i?0:-1;});
+  const el=$("#proj");el.setAttribute("aria-labelledby","tab-"+p.key);
+  el.innerHTML=`<p class="label">Detail ${String.fromCharCode(65+i)}</p><h3>${p.title}</h3><dl class="credits">${p.credits.map(c=>`<dt>${c[0]}</dt><dd>${c[1]}</dd>`).join("")}</dl>${p.body}${p.demo?`<div class="demo" id="demo"><div class="demo-head"><span class="label">${p.demoTitle}</span></div><p class="hint" style="margin-bottom:10px">${p.demoHint}</p></div>`:""}`;
+  const fn={cobot:demoCobot,glasses:demoRadar,mri:demoMri,drone:demoDrone,elective:demoSteps}[p.key];if(fn)stopDemo=fn()||null;}
+
+/* ---- demo: cobot ---- */
+function demoCobot(){const box=$("#demo");const W=560,H=300;const cv=h("canvas",{tabindex:"0","aria-label":"Robot arm workspace. Drag or use arrow keys to move the controller."});box.appendChild(cv);const ctx=setupCanvas(cv,W,H);
+  const bar=h("div",{class:"demo-bar"});const grip=h("button",{class:"btn red","aria-pressed":"false",type:"button"},"Grip: open");const rs=h("button",{class:"btn",type:"button"},"Reset");bar.append(grip,rs);box.appendChild(bar);
+  const log=h("div",{class:"log","aria-label":"Command log"});box.appendChild(log);
+  const base=[150,262],L1=120,L2=100;let tgt=[300,160],cur=[300,160],closed=false,blk,held=false,last=performance.now(),lastSent=[300,160],raf;
+  function reset(){tgt=[300,160];cur=[300,160];closed=false;held=false;blk={x:390,y:246};grip.textContent="Grip: open";grip.setAttribute("aria-pressed","false");log.innerHTML="";logLine(log,"LINK  Quest 3 ↔ cobot connected","c");}
+  reset();
+  function ik(p){let dx=p[0]-base[0],dy=p[1]-base[1];let d=Math.hypot(dx,dy);const mx=L1+L2-2,mn=Math.abs(L1-L2)+6;if(d>mx){dx*=mx/d;dy*=mx/d;d=mx;}if(d<mn){dx*=mn/d;dy*=mn/d;d=mn;}const a2=Math.acos(Math.max(-1,Math.min(1,(d*d-L1*L1-L2*L2)/(2*L1*L2))));const a1=Math.atan2(dy,dx)-Math.atan2(L2*Math.sin(a2),L1+L2*Math.cos(a2));const e=[base[0]+L1*Math.cos(a1),base[1]+L1*Math.sin(a1)];return{e,t:[e[0]+L2*Math.cos(a1+a2),e[1]+L2*Math.sin(a1+a2)],ang:a1+a2};}
+  function clampT(){tgt[0]=Math.max(20,Math.min(W-20,tgt[0]));tgt[1]=Math.max(20,Math.min(258,tgt[1]));}
+  let drag=false;cv.addEventListener("pointerdown",e=>{drag=true;cv.setPointerCapture(e.pointerId);tgt=toLocal(cv,W,e);clampT();});cv.addEventListener("pointermove",e=>{if(drag){tgt=toLocal(cv,W,e);clampT();}});cv.addEventListener("pointerup",()=>drag=false);cv.addEventListener("pointercancel",()=>drag=false);
+  cv.addEventListener("keydown",e=>{const k={ArrowLeft:[-12,0],ArrowRight:[12,0],ArrowUp:[0,-12],ArrowDown:[0,12]}[e.key];if(k){e.preventDefault();tgt[0]+=k[0];tgt[1]+=k[1];clampT();}if(e.key===" "){e.preventDefault();grip.click();}});
+  grip.addEventListener("click",()=>{closed=!closed;grip.textContent="Grip: "+(closed?"closed":"open");grip.setAttribute("aria-pressed",String(closed));logLine(log,closed?"CMD   GRIP_CLOSE":"CMD   GRIP_OPEN","r");const tip=ik(cur).t;if(closed&&!held&&Math.hypot(tip[0]-blk.x,tip[1]-(blk.y-12))<26){held=true;logLine(log,"STAT  object grasped");}if(!closed&&held){held=false;logLine(log,"STAT  object released");}});
+  rs.addEventListener("click",reset);
+  function arm(k,col,dash,wd){ctx.save();ctx.strokeStyle=col;ctx.lineWidth=wd;ctx.lineCap="round";ctx.setLineDash(dash);ctx.beginPath();ctx.moveTo(base[0],base[1]);ctx.lineTo(k.e[0],k.e[1]);ctx.lineTo(k.t[0],k.t[1]);ctx.stroke();ctx.restore();}
+  function draw(now){raf=requestAnimationFrame(draw);const dt=Math.min(50,now-last);last=now;const f=1-Math.pow(.004,dt/1000);cur[0]+=(tgt[0]-cur[0])*f;cur[1]+=(tgt[1]-cur[1])*f;
+    const dx=tgt[0]-lastSent[0],dy=tgt[1]-lastSent[1];if(Math.hypot(dx,dy)>14){logLine(log,`TX    DELTA  dx=${(dx/2).toFixed(1).padStart(6)} mm  dy=${(-dy/2).toFixed(1).padStart(6)} mm`,"c");logLine(log,`RX    CUR_POS x=${((cur[0]-base[0])/2).toFixed(1).padStart(6)} mm  y=${((base[1]-cur[1])/2).toFixed(1).padStart(6)} mm`);lastSent=[tgt[0],tgt[1]];}
+    const kr=ik(cur),kv=ik(tgt);if(held){blk.x=kr.t[0];blk.y=kr.t[1]+12;}else if(blk.y<262){blk.y=Math.min(262,blk.y+dt*.4);}
+    ctx.clearRect(0,0,W,H);ctx.fillStyle=C.paper;ctx.fillRect(0,0,W,H);
+    ctx.strokeStyle=C["rule-2"];ctx.lineWidth=1;for(let x=0;x<W;x+=20){ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x,H);ctx.stroke();}for(let y=0;y<H;y+=20){ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(W,y);ctx.stroke();}
+    ctx.fillStyle=C.ink;ctx.fillRect(0,262,W,H-262);ctx.fillRect(base[0]-26,250,52,12);
+    arm(kv,C.cyan,[6,5],3);ctx.fillStyle=C.cyan;ctx.beginPath();ctx.arc(tgt[0],tgt[1],7,0,7);ctx.fill();
+    arm(kr,C.ink,[],9);[base,kr.e].forEach(p=>{ctx.fillStyle=C.panel;ctx.strokeStyle=C.ink;ctx.lineWidth=3;ctx.beginPath();ctx.arc(p[0],p[1],8,0,7);ctx.fill();ctx.stroke();});
+    const g=closed?5:13;ctx.save();ctx.translate(kr.t[0],kr.t[1]);ctx.rotate(kr.ang);ctx.strokeStyle=C.red;ctx.lineWidth=4;ctx.lineCap="round";ctx.beginPath();ctx.moveTo(0,-g);ctx.lineTo(12,-g);ctx.moveTo(0,g);ctx.lineTo(12,g);ctx.moveTo(0,-g);ctx.lineTo(0,g);ctx.stroke();ctx.restore();
+    ctx.fillStyle=held?C.red:C.panel;ctx.strokeStyle=C.red;ctx.lineWidth=2;ctx.fillRect(blk.x-12,blk.y-24,24,24);ctx.strokeRect(blk.x-12,blk.y-24,24,24);
+    ctx.fillStyle=C["ink-2"];ctx.font="10px 'IBM Plex Mono',monospace";ctx.fillText("VIRTUAL (Quest 3)",W-150,22);ctx.fillText("REAL ARM (CUR_POS)",W-150,38);ctx.strokeStyle=C.cyan;ctx.setLineDash([6,5]);ctx.lineWidth=3;ctx.beginPath();ctx.moveTo(W-176,19);ctx.lineTo(W-156,19);ctx.stroke();ctx.setLineDash([]);ctx.strokeStyle=C.ink;ctx.lineWidth=6;ctx.beginPath();ctx.moveTo(W-176,35);ctx.lineTo(W-156,35);ctx.stroke();}
+  raf=requestAnimationFrame(draw);return()=>cancelAnimationFrame(raf);}
+
+/* ---- demo: rider radar ---- */
+function demoRadar(){const box=$("#demo");const W=560,H=300;const cv=h("canvas",{"aria-label":"Simulated rear camera view with detected vehicles"});box.appendChild(cv);const ctx=setupCanvas(cv,W,H);
+  const ro=h("div",{class:"readout","aria-live":"polite"});box.appendChild(ro);
+  const bar=h("div",{class:"demo-bar"});const crash=h("button",{class:"btn red",type:"button"},"Simulate a crash");const pause=h("button",{class:"btn",type:"button","aria-pressed":"false"},"Pause");bar.append(crash,pause);box.appendChild(bar);
+  const log=h("div",{class:"log"});box.appendChild(log);logLine(log,"GLASSES  audio channel ready","c");
+  const CLS=[["TW",.9,.55],["LMV",1.5,.9],["HMV",2.2,1.4],["RICK",1.3,1.0]];const hz=110,vx=W/2;let cars=[],last=performance.now(),spawn=0,raf,paused=false,crashT=-1,lastLevel="",said=0;
+  function add(){const c=CLS[Math.floor(Math.random()*CLS.length)];cars.push({c:c[0],w:c[1],hh:c[2],lane:[-1,0,1][Math.floor(Math.random()*3)],z:60,v:4+Math.random()*9});}
+  add();add();cars[1].z=30;
+  pause.addEventListener("click",()=>{paused=!paused;pause.setAttribute("aria-pressed",String(paused));pause.textContent=paused?"Resume":"Pause";});
+  crash.addEventListener("click",()=>{if(crashT>=0)return;crashT=0;crash.disabled=true;logLine(log,"IMU      accel spike 6.4 g, gyro 310 °/s","r");setTimeout(()=>logLine(log,"LOGIC    abnormal motion confirmed: CRASH","r"),700);setTimeout(()=>logLine(log,"SOS      sending location 18.529 N, 73.857 E (sample)","r"),1400);setTimeout(()=>{logLine(log,"SOS      delivered to emergency contacts ✓","c");},2300);setTimeout(()=>{crashT=-1;crash.disabled=false;},4200);});
+  function draw(now){raf=requestAnimationFrame(draw);const dt=Math.min(50,now-last)/1000;last=now;
+    if(!paused){spawn-=dt;if(spawn<=0&&cars.length<4){add();spawn=1.4+Math.random()*1.6;}cars.forEach(c=>c.z-=c.v*dt);cars=cars.filter(c=>c.z>3);}
+    ctx.fillStyle=C.paper;ctx.fillRect(0,0,W,H);
+    ctx.fillStyle=C["rule-2"];ctx.beginPath();ctx.moveTo(vx-8,hz);ctx.lineTo(vx+8,hz);ctx.lineTo(W+80,H);ctx.lineTo(-80,H);ctx.closePath();ctx.globalAlpha=.35;ctx.fill();ctx.globalAlpha=1;
+    ctx.strokeStyle=C.ink;ctx.lineWidth=1.5;ctx.beginPath();ctx.moveTo(0,hz);ctx.lineTo(W,hz);ctx.stroke();
+    ctx.setLineDash([10,12]);[-.5,.5].forEach(l=>{ctx.beginPath();ctx.moveTo(vx+l*16,hz);ctx.lineTo(vx+l*W*1.05,H);ctx.stroke();});ctx.setLineDash([]);
+    const F=260;let nearest=null;
+    cars.slice().sort((a,b)=>b.z-a.z).forEach(c=>{const s=F/c.z;const cx=vx+c.lane*1.6*s,bw=c.w*s,bh=c.hh*s;const by=hz+1.2*s-bh;const area=bw*bh;const dist=Math.round(F*Math.sqrt(c.w*c.hh)/Math.sqrt(area));
+      const risk=dist<9&&c.lane===0?"alert":(dist<16?"caution":"safe");if(!nearest||dist<nearest.dist)nearest={dist,c,risk,v:c.v};
+      ctx.fillStyle=C.ink;ctx.globalAlpha=.8;ctx.fillRect(cx-bw/2+bw*.08,by+bh*.12,bw*.84,bh*.88);ctx.globalAlpha=1;
+      const col=risk==="alert"?C.red:risk==="caution"?"#C98A12":C.cyan;ctx.strokeStyle=col;ctx.lineWidth=2;ctx.strokeRect(cx-bw/2,by,bw,bh);
+      ctx.fillStyle=col;const lab=`${c.c} ${dist} m`;ctx.font="600 11px 'IBM Plex Mono',monospace";const tw=ctx.measureText(lab).width+8;ctx.fillRect(cx-bw/2,by-16,tw,16);ctx.fillStyle=C.panel;ctx.fillText(lab,cx-bw/2+4,by-4);});
+    if(crashT>=0){crashT+=dt;ctx.fillStyle=C.red;ctx.globalAlpha=.18+.12*Math.sin(crashT*10);ctx.fillRect(0,0,W,H);ctx.globalAlpha=1;ctx.fillStyle=C.red;ctx.font="800 26px Archivo,sans-serif";ctx.fillText("SOS",20,40);}
+    ctx.fillStyle=C["ink-2"];ctx.font="10px 'IBM Plex Mono',monospace";ctx.fillText("REAR CAMERA · SIMULATED",W-170,H-12);
+    const lvl=nearest?nearest.risk:"safe";const txt={safe:"SAFE",caution:"CAUTION",alert:"ALERT"}[lvl];
+    if(lvl!==lastLevel&&now-said>900){if(lvl==="alert"){logLine(log,`GLASSES  "Vehicle close behind, ${nearest.dist} metres"`,"r");said=now;}else if(lvl==="caution"&&lastLevel==="safe"){logLine(log,`GLASSES  "${nearest.c.c} approaching"`);said=now;}lastLevel=lvl;}
+    ro.innerHTML=`<span>Status <span class="pill ${lvl}">${txt}</span></span><span>Nearest <b>${nearest?nearest.dist+" m · "+nearest.c.c:"none"}</b></span><span>Closing speed <b>${nearest?(nearest.v*3.6).toFixed(0)+" km/h":"–"}</b></span>`;}
+  raf=requestAnimationFrame(draw);return()=>cancelAnimationFrame(raf);}
+
+/* ---- demo: MRI registration ---- */
+function demoMri(){const box=$("#demo");const W=560,H=320;const cv=h("canvas",{"aria-label":"Registration view: real head with fiducials and a movable MRI overlay"});box.appendChild(cv);const ctx=setupCanvas(cv,W,H);
+  const bar=h("div",{class:"demo-bar"});const lab=h("label",{for:"rotR",class:"label"},"Rotate");const rot=h("input",{type:"range",id:"rotR",min:"-60",max:"60",value:"20",step:"0.5"});rot.style.maxWidth="220px";
+  const kb=h("button",{class:"btn red",type:"button"},"Align with Kabsch (SVD)");const rs=h("button",{class:"btn",type:"button"},"Reset");bar.append(lab,rot,kb,rs);box.appendChild(bar);
+  const ro=h("div",{class:"readout","aria-live":"polite"});box.appendChild(ro);
+  const cx=280,cy=165;const Q=[[-118,-66],[112,-78],[124,70],[-106,82]].map(p=>[p[0]+cx,p[1]+cy]);
+  const noise=[[1.5,-1],[-1.2,1.4],[.8,1.1],[-1.4,-.9]];const P=Q.map((q,i)=>[q[0]-cx+noise[i][0],q[1]-cy+noise[i][1]]);
+  let th,tx,ty,anim=null,raf;
+  function reset(){th=20*Math.PI/180;tx=cx+70;ty=cy-40;rot.value=20;anim=null;}reset();
+  function T(p){const c=Math.cos(th),s=Math.sin(th);return[c*p[0]-s*p[1]+tx,s*p[0]+c*p[1]+ty];}
+  function rms(){let s=0;P.forEach((p,i)=>{const t=T(p);s+=(t[0]-Q[i][0])**2+(t[1]-Q[i][1])**2;});return Math.sqrt(s/P.length)*.5;}
+  function kabsch(){const pm=[0,0],qm=[0,0];P.forEach((p,i)=>{pm[0]+=p[0]/4;pm[1]+=p[1]/4;qm[0]+=Q[i][0]/4;qm[1]+=Q[i][1]/4;});let S=0,Cc=0;P.forEach((p,i)=>{const a=[p[0]-pm[0],p[1]-pm[1]],b=[Q[i][0]-qm[0],Q[i][1]-qm[1]];S+=a[0]*b[0]+a[1]*b[1];Cc+=a[0]*b[1]-a[1]*b[0];});const t=Math.atan2(Cc,S);const c=Math.cos(t),s=Math.sin(t);return{th:t,tx:qm[0]-(c*pm[0]-s*pm[1]),ty:qm[1]-(s*pm[0]+c*pm[1])};}
+  kb.addEventListener("click",()=>{anim={from:{th,tx,ty},to:kabsch(),t:0};});
+  rs.addEventListener("click",reset);
+  rot.addEventListener("input",()=>{anim=null;th=rot.value*Math.PI/180;});
+  let drag=null;cv.addEventListener("pointerdown",e=>{anim=null;const p=toLocal(cv,W,e);drag={p,tx,ty};cv.setPointerCapture(e.pointerId);});cv.addEventListener("pointermove",e=>{if(!drag)return;const p=toLocal(cv,W,e);tx=drag.tx+p[0]-drag.p[0];ty=drag.ty+p[1]-drag.p[1];});cv.addEventListener("pointerup",()=>drag=null);cv.addEventListener("pointercancel",()=>drag=null);
+  function ell(x,y,rx,ry){ctx.beginPath();ctx.ellipse(x,y,rx,ry,0,0,7);}
+  function draw(){raf=requestAnimationFrame(draw);
+    if(anim){anim.t=Math.min(1,anim.t+.035);const e=1-Math.pow(1-anim.t,3);th=anim.from.th+(anim.to.th-anim.from.th)*e;tx=anim.from.tx+(anim.to.tx-anim.from.tx)*e;ty=anim.from.ty+(anim.to.ty-anim.from.ty)*e;rot.value=(th*180/Math.PI).toFixed(1);if(anim.t>=1)anim=null;}
+    ctx.fillStyle=C.paper;ctx.fillRect(0,0,W,H);
+    ctx.strokeStyle=C.ink;ctx.lineWidth=2.5;ell(cx,cy,132,110);ctx.stroke();ctx.lineWidth=1;ctx.setLineDash([3,4]);ell(cx,cy,142,120);ctx.stroke();ctx.setLineDash([]);
+    ctx.beginPath();ctx.moveTo(cx+128,cy-14);ctx.lineTo(cx+146,cy+4);ctx.lineTo(cx+130,cy+14);ctx.stroke();
+    Q.forEach((q,i)=>{ctx.fillStyle=C.panel;ctx.strokeStyle=C.ink;ctx.lineWidth=2;ctx.beginPath();ctx.arc(q[0],q[1],9,0,7);ctx.fill();ctx.stroke();ctx.fillStyle=C.ink;ctx.font="600 10px 'IBM Plex Mono',monospace";ctx.fillText("F"+(i+1),q[0]+12,q[1]-10);});
+    ctx.save();ctx.translate(tx,ty);ctx.rotate(th);ctx.strokeStyle=C.cyan;ctx.fillStyle=C.cyan;ctx.globalAlpha=.9;ctx.lineWidth=2;
+    ell(0,0,110,90);ctx.globalAlpha=.12;ctx.fill();ctx.globalAlpha=.9;ctx.stroke();ctx.beginPath();ctx.moveTo(0,-88);ctx.lineTo(0,88);ctx.stroke();
+    for(let k=0;k<5;k++){ctx.beginPath();ctx.arc(-48,-40+k*20,14,Math.PI*.1,Math.PI*.9);ctx.stroke();ctx.beginPath();ctx.arc(48,-40+k*20,14,Math.PI*.1,Math.PI*.9);ctx.stroke();}
+    ctx.lineWidth=2.5;ctx.strokeStyle=C.red;ell(34,22,14,10);ctx.stroke();
+    P.forEach(p=>{ctx.fillStyle=C.cyan;ctx.globalAlpha=1;ctx.beginPath();ctx.arc(p[0],p[1],5,0,7);ctx.fill();});ctx.restore();
+    P.forEach((p,i)=>{const t=T(p);ctx.strokeStyle=C.red;ctx.lineWidth=1;ctx.setLineDash([2,3]);ctx.beginPath();ctx.moveTo(t[0],t[1]);ctx.lineTo(Q[i][0],Q[i][1]);ctx.stroke();ctx.setLineDash([]);});
+    ctx.fillStyle=C["ink-2"];ctx.font="10px 'IBM Plex Mono',monospace";ctx.fillText("BLACK: PATIENT + FIDUCIALS   BLUE: MRI VOLUME   RED: LESION",14,H-12);
+    const e=rms();const ok=e<1.5;ro.innerHTML=`<span>RMS registration error <b style="color:${ok?C.ok:C.red}">${e.toFixed(2)} mm</b></span><span>Rotation <b>${(th*180/Math.PI).toFixed(1)}°</b></span><span>${ok?'<span class="pill safe">REGISTERED</span>':'<span class="pill caution">NOT ALIGNED</span>'}</span>`;}
+  raf=requestAnimationFrame(draw);return()=>cancelAnimationFrame(raf);}
+
+/* ---- demo: drone RGB / IR ---- */
+function demoDrone(){const v=$("#irView");let ir=false;
+  function paint(){const sky=ir?"#0B0B14":"#BFDDF0",body=ir?"#3B2A5C":"#26324A",hot=ir?"#FFE14D":"#26324A",glow=ir?"#FF8A2B":"transparent",box=ir?"#5CFF9D":C.red,tree=ir?"#1C1633":"#5E8A5A";
+    v.style.background=sky;
+    v.innerHTML=`<svg viewBox="0 0 400 200" aria-label="${ir?"Infrared":"RGB"} view of a drone with a detection box"><path d="M0 170 Q60 140 110 168 T220 160 T330 170 T400 158 V200 H0Z" fill="${tree}"/>
+    <g transform="translate(250 70)"><circle r="18" fill="${glow}" opacity=".45" cx="-30" cy="-8"/><circle r="18" fill="${glow}" opacity=".45" cx="30" cy="-8"/>
+    <rect x="-16" y="-8" width="32" height="14" rx="4" fill="${body}"/><line x1="-30" y1="-8" x2="30" y2="-8" stroke="${body}" stroke-width="3"/>
+    <ellipse cx="-30" cy="-12" rx="16" ry="2.5" fill="${hot}"/><ellipse cx="30" cy="-12" rx="16" ry="2.5" fill="${hot}"/><circle cx="-30" cy="-8" r="3.5" fill="${hot}"/><circle cx="30" cy="-8" r="3.5" fill="${hot}"/>
+    <rect x="-52" y="-26" width="104" height="42" fill="none" stroke="${box}" stroke-width="2"/><rect x="-52" y="-40" width="42" height="14" fill="${box}"/><text x="-48" y="-29" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="600" fill="${ir?"#0B0B14":"#fff"}">drone</text></g>
+    <text x="12" y="20" font-family="IBM Plex Mono,monospace" font-size="10" fill="${ir?"#9aa":"#26324A"}">${ir?"IR · THERMAL":"RGB · DAYLIGHT"}</text></svg>`;}
+  paint();const rb=$("#rgbBtn"),ib=$("#irBtn");
+  rb.addEventListener("click",()=>{ir=false;rb.setAttribute("aria-pressed","true");ib.setAttribute("aria-pressed","false");paint();});
+  ib.addEventListener("click",()=>{ir=true;ib.setAttribute("aria-pressed","true");rb.setAttribute("aria-pressed","false");paint();});
+  themeListeners.push(paint);return()=>{const k=themeListeners.indexOf(paint);if(k>=0)themeListeners.splice(k,1);};}
+
+/* ---- elective stepper ---- */
+function demoSteps(){const S=["Install Unity Hub on department machines","Unity basics tutorial","Build an AR project: a 3D universe","Select a sample","Embed objects and build scenarios around them","Ship an application executable"];const ol=$("#steps");const done=new Set();
+  S.forEach((s,i)=>{const li=h("li");const b=h("button",{type:"button","aria-pressed":"false"},`<i>${i+1}</i><span>${s}</span>`);b.addEventListener("click",()=>{done.has(i)?done.delete(i):done.add(i);b.setAttribute("aria-pressed",String(done.has(i)));$("#stepBar").style.width=(done.size/S.length*100)+"%";});li.appendChild(b);ol.appendChild(li);});}
+
+selProj(0);
+
+/* ================= D · ROADMAP ================= */
+const PLAN=[["A",2024,"Set up the Centre of Excellence","Establish the lab and start the research framework."],["B",2025,"Webinars and trainings","Open the lab's knowledge to students, faculty and industry."],["C",2026,"PG and professional certification","Launch postgraduate and professional certification programmes."],["D",2027,"International technology transfer","Partner with institutions abroad to exchange technology."],["E",2028,"Industry hub for AR/VR","Become a state-of-the-art hub that industry comes to."]];
+const now=new Date();const yr=now.getFullYear()+now.getMonth()/12;
+const years=$("#tlYears");let revSel=Math.max(0,Math.min(4,Math.floor(yr)-2024));
+PLAN.forEach((p,i)=>{const st=p[1]<Math.floor(yr)?"done":p[1]===Math.floor(yr)?"now":"";const b=h("button",{type:"button",role:"tab",class:st,"aria-selected":"false"},`<i></i><span>${p[1]}</span><small>REV ${p[0]}</small>`);b.addEventListener("click",()=>selRev(i));years.appendChild(b);});
+function selRev(i){revSel=i;const p=PLAN[i];[...years.children].forEach((b,j)=>b.setAttribute("aria-selected",j===i?"true":"false"));const yi=p[1];const status=yi<Math.floor(yr)?"Completed":yi===Math.floor(yr)?"In progress":"Planned";
+  $("#revCard").innerHTML=`<span class="revl">${p[0]}</span><h3>${p[2]}</h3><p><span class="label" style="color:${status==="In progress"?C.red:C["ink-2"]}">${status}</span> · ${p[3]}</p>`;}
+function placeNow(){const f=Math.max(0,Math.min(1,(yr-2024+.5)/5));$("#tlNow").style.left=(f*100)+"%";$("#tlNowLabel").textContent="TODAY · "+now.toLocaleString("en-GB",{month:"short",year:"numeric"}).toUpperCase();}
+placeNow();selRev(revSel);
+const STEPS=[["Research centre","The lab builds its research base and first projects."],["Knowledge transfer centre","Skills flow out through courses, trainings and webinars."],["Industry hub","Companies bring real problems; the lab delivers prototypes."],["Notable IP contribution","Patents and publications from the lab's research."],["Internationally recognised CoE","A Centre of Excellence known beyond India."]];
+const stairs=$("#stairs");STEPS.forEach((s,i)=>{const b=h("button",{type:"button","aria-pressed":i===0?"true":"false"},`<i>0${i+1}</i><span>${s[0]}</span>`);b.addEventListener("click",()=>{[...stairs.children].forEach((x,j)=>x.setAttribute("aria-pressed",String(j===i)));$("#stairNote").textContent=s[1];});stairs.appendChild(b);});
+$("#stairNote").textContent=STEPS[0][1];
+
+/* ================= F · copy ================= */
+document.querySelectorAll(".copy").forEach(b=>b.addEventListener("click",()=>{const el=document.getElementById(b.dataset.copy);const txt=el.textContent;
+  const done=()=>{b.textContent="Copied";setTimeout(()=>b.textContent="Copy",1600);};
+  const fall=()=>{const r=document.createRange();r.selectNodeContents(el);const s=getSelection();s.removeAllRanges();s.addRange(r);b.textContent="Selected";setTimeout(()=>b.textContent="Copy",1600);};
+  try{navigator.clipboard.writeText(txt).then(done,fall);}catch(e){fall();}}));
+
+themeListeners.push(()=>{selRev(revSel);drawChart();});
+})();
+</script>
+</body>
+</html>
