@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="color-scheme" content="light only">
+<title>AR/VR Lab in Your Room</title>
+<meta name="description" content="Place the Hirachand Daulat AR/VR Lab's headsets in your own room with augmented reality. No app needed.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,300..900&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<script type="module" src="https://cdn.jsdelivr.net/npm/@google/model-viewer@3.5.0/dist/model-viewer.min.js"></script>
+<style>
+:root{--bg:#E9E2D0;--panel:#FBF8F0;--ink:#1B2A44;--ink-2:#4E5A72;--rule:rgba(27,42,68,.13);--rule-2:rgba(27,42,68,.28);--red:#D23F29;--cyan:#1590BA;
+ --display:"Archivo","Arial Narrow",Arial,sans-serif;--mono:"IBM Plex Mono",Menlo,Consolas,monospace;color-scheme:light}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--bg);color:var(--ink);font:400 16px/1.55 var(--display);
+ background-image:linear-gradient(var(--rule) 1px,transparent 1px),linear-gradient(90deg,var(--rule) 1px,transparent 1px);background-size:24px 24px;
+ padding:max(14px,env(safe-area-inset-top)) 16px max(24px,env(safe-area-inset-bottom))}
+.wrap{max-width:980px;margin:0 auto;display:grid;gap:14px}
+.top{display:flex;justify-content:space-between;align-items:center;gap:10px;border-bottom:1.5px solid var(--ink);padding-bottom:10px}
+.drg{font:600 11px var(--mono);letter-spacing:.1em;background:var(--ink);color:var(--bg);padding:4px 8px}
+.top a{font:500 12px var(--mono);color:var(--ink)}
+h1{position:relative;margin:4px 0 0;font-weight:900;font-variation-settings:"wdth" 125;font-size:clamp(2.3rem,8vw,4rem);line-height:.92;letter-spacing:-.03em;color:transparent}
+h1::before,h1::after{content:attr(data-t);position:absolute;inset:0;mix-blend-mode:multiply;white-space:pre}
+h1::before{color:#FF3B26;transform:translateX(-3px)}h1::after{color:#12B5E6;transform:translate(3px,1px)}
+.lede{margin:0;max-width:60ch}
+.picker{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px}
+@media (max-width:600px){.picker{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.btn{border:1.5px solid var(--ink);background:var(--panel);color:var(--ink);padding:9px 8px;font:600 12.5px var(--mono);cursor:pointer;text-align:center}
+.btn[aria-pressed="true"]{background:var(--ink);color:var(--bg)}
+.btn:focus-visible{outline:2px solid var(--red);outline-offset:2px}
+.stage{position:relative;border:1.5px solid var(--ink);background:var(--panel)}
+model-viewer{display:block;width:100%;height:min(62vh,520px);--poster-color:transparent;background:var(--panel)}
+.cap{position:absolute;left:10px;top:8px;font:500 10.5px var(--mono);letter-spacing:.08em;color:var(--ink-2);pointer-events:none;z-index:1}
+.mode{position:absolute;right:10px;top:8px;display:flex;z-index:1}
+.mode button{border:1.5px solid var(--ink);background:var(--panel);font:600 11px var(--mono);padding:5px 9px;cursor:pointer;color:var(--ink)}
+.mode button+button{border-left:0}
+.mode button[aria-pressed="true"]{background:var(--ink);color:var(--bg)}
+.ar-btn{position:absolute;left:50%;bottom:14px;transform:translateX(-50%);border:0;background:var(--red);color:#fff;font:700 14px var(--mono);letter-spacing:.06em;padding:13px 20px;cursor:pointer;box-shadow:3px 3px 0 var(--ink);white-space:nowrap}
+.progress{position:absolute;left:0;right:0;bottom:0;height:4px;background:transparent}
+.progress i{display:block;height:100%;width:0;background:var(--red);transition:width .2s}
+.info{display:grid;grid-template-columns:auto minmax(0,1fr);gap:4px 14px;border-left:3px solid var(--red);padding:4px 0 4px 14px}
+.info b{grid-row:span 2;font:850 30px/1 var(--display);color:var(--red)}
+.info h2{margin:0;font-size:1.15rem}
+.info p{margin:0;color:var(--ink-2)}
+.steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+@media (max-width:600px){.steps{grid-template-columns:minmax(0,1fr)}}
+.st{border:1.5px solid var(--ink);background:var(--panel);padding:10px 12px;font-size:.95rem}
+.st span{display:block;font:600 11px var(--mono);letter-spacing:.1em;color:var(--red)}
+.note{font:400 12px/1.5 var(--mono);color:var(--ink-2)}
+.desk{display:none;border:1.5px dashed var(--ink-2);padding:10px 12px;font:500 13px/1.5 var(--mono)}
+.no-ar .desk{display:block}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top"><span class="drg">DRG. NO. ARVR-001 · AR</span><a href="../">Web brochure →</a></div>
+  <h1 data-t="THE LAB,&#10;IN YOUR ROOM"><span style="opacity:0;white-space:pre">THE LAB,
+IN YOUR ROOM</span></h1>
+  <p class="lede">Pick one of the Hirachand Daulat AR/VR Lab's four headsets, then tap <b>View in your room</b> to place it on a real table at life size. Switch to <b>Exploded</b> to see its parts float apart around you.</p>
+
+  <div class="picker" role="group" aria-label="Choose a headset">
+    <button class="btn" data-k="q3" aria-pressed="true">Meta Quest 3</button>
+    <button class="btn" data-k="vive" aria-pressed="false">HTC Vive Pro 2</button>
+    <button class="btn" data-k="hl2" aria-pressed="false">HoloLens 2</button>
+    <button class="btn" data-k="avp" aria-pressed="false">Apple Vision Pro</button>
+  </div>
+
+  <div class="stage">
+    <span class="cap" id="cap">FIG. 1A · META QUEST 3</span>
+    <div class="mode" role="group" aria-label="View">
+      <button id="mAsm" aria-pressed="true">Assembled</button><button id="mExp" aria-pressed="false">Exploded</button>
+    </div>
+    <model-viewer id="mv" src="models/q3.glb" alt="3D model of the Meta Quest 3 headset"
+      ar ar-modes="webxr scene-viewer quick-look" ar-scale="fixed" ar-placement="floor"
+      camera-controls touch-action="pan-y" auto-rotate auto-rotate-delay="1500" rotation-per-second="18deg"
+      shadow-intensity="0.8" exposure="1" environment-image="neutral" interaction-prompt="auto" loading="eager">
+      <button slot="ar-button" class="ar-btn">▣ VIEW IN YOUR ROOM</button>
+      <div slot="progress-bar" class="progress"><i id="bar"></i></div>
+    </model-viewer>
+  </div>
+
+  <div class="info" aria-live="polite"><b id="iN">01</b><h2 id="iT">Meta Quest 3</h2><p id="iP"></p></div>
+  <p class="desk" id="desk">AR needs a phone or tablet. Open this page on an Android phone with Google Play Services for AR, or an iPhone/iPad with iOS 12 or later. On a computer you can still turn and zoom the model above.</p>
+
+  <div class="steps">
+    <div class="st"><span>01</span>Tap <b>View in your room</b> and allow the camera.</div>
+    <div class="st"><span>02</span>Move your phone slowly over a table or the floor until the headset appears.</div>
+    <div class="st"><span>03</span>Walk around it, pinch to resize, and drag to move it.</div>
+  </div>
+  <p class="note">3D models via Sketchfab, CC BY 4.0: Meta Quest 3 by ElinHohler · HTC Vive Pro by EternalRealm (the lab's Vive Pro 2 shares its shell) · HoloLens 2 by muertoHambre · Apple Vision Pro by jnanbr07. Hirachand Daulat AR/VR Lab, Department of Mechanical Engineering, COEP Technological University, Pune.</p>
+</div>
+<script>
+(function(){
+  const H={
+    q3:{n:"01",fig:"FIG. 1A · META QUEST 3",name:"Meta Quest 3",txt:"Standalone VR and mixed reality. 2064 × 2208 pixels per eye, 110° field of view, colour passthrough and hand tracking. 500 g, 2–3 hours of battery."},
+    vive:{n:"02",fig:"FIG. 1B · HTC VIVE PRO SERIES",name:"HTC Vive Pro 2",txt:"PC-tethered VR for the sharpest image: 2448 × 2448 per eye (5K), 120° field of view, Lighthouse base-station tracking. 850 g."},
+    hl2:{n:"03",fig:"FIG. 1C · MICROSOFT HOLOLENS 2",name:"Microsoft HoloLens 2",txt:"Standalone AR: holograms in the real room through clear waveguides, about 52° field of view, controlled by hand, eye and voice. About 566 g."},
+    avp:{n:"04",fig:"FIG. 1D · APPLE VISION PRO",name:"Apple Vision Pro",txt:"Mixed reality with micro-OLED displays of about 4K per eye (estimated), Apple M2 + R1 chips, and eye, hand and voice input."}
+  };
+  const mv=document.getElementById("mv");let key="q3",exploded=false;
+  function load(){
+    const h=H[key];mv.src=`models/${key}${exploded?"_exploded":""}.glb`;mv.alt=`3D model of the ${h.name} headset${exploded?", exploded into its parts":""}`;
+    document.getElementById("cap").textContent=h.fig+(exploded?" · EXPLODED":"");
+    document.getElementById("iN").textContent=h.n;document.getElementById("iT").textContent=h.name;document.getElementById("iP").textContent=h.txt;
+  }
+  document.querySelectorAll(".picker .btn").forEach(b=>b.addEventListener("click",()=>{key=b.dataset.k;document.querySelectorAll(".picker .btn").forEach(x=>x.setAttribute("aria-pressed",String(x===b)));load();}));
+  const mA=document.getElementById("mAsm"),mE=document.getElementById("mExp");
+  function setMode(e){exploded=e;mA.setAttribute("aria-pressed",String(!e));mE.setAttribute("aria-pressed",String(e));load();}
+  mA.addEventListener("click",()=>setMode(false));mE.addEventListener("click",()=>setMode(true));
+  mv.addEventListener("progress",e=>{document.getElementById("bar").style.width=(e.detail.totalProgress*100)+"%";if(e.detail.totalProgress>=1)setTimeout(()=>document.getElementById("bar").style.width="0",400);});
+  // show the "needs a phone" note once model-viewer knows AR is unavailable here
+  customElements.whenDefined("model-viewer").then(()=>setTimeout(()=>{if(!mv.canActivateAR)document.body.classList.add("no-ar");},1200));
+  load();
+})();
+</script>
+</body></html>
